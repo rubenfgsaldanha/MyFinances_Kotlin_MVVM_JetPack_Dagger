@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/driveFragment"
+        android:icon="@drawable/ic_action_drive_sync"
+        app:showAsAction="ifRoom"
+        android:title="@string/drive_sync"/>
+
+    <item
+        android:id="@+id/walletsFragment"
+        android:icon="@drawable/ic_action_add_wallet"
+        app:showAsAction="never"
+        android:title="@string/add_wallet" />
+
+    <item
+        android:id="@+id/categoriesFragment"
+        android:icon="@drawable/ic_action_settings"
+        app:showAsAction="never"
+        android:title="@string/categories" />
+
+    <item
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/ic_action_settings"
+        app:showAsAction="never"
+        android:title="@string/settings" />
+
+    <item
+        android:id="@+id/aboutFragment"
+        android:icon="@drawable/ic_action_about"
+        app:showAsAction="never"
+        android:title="@string/about"/>
+</menu>
