@@ -1,11 +1,8 @@
 package com.example.myfinances2020.data.network
 
-import android.os.Parcelable
 import com.example.myfinances2020.data.database.entities.Transaction
-import com.squareup.moshi.Json
-import kotlinx.android.parcel.Parcelize
+import com.google.gson.annotations.SerializedName
 
-@Parcelize
 data class NetworkTransaction(
     val _id: Long,
     val day: Int,
@@ -14,8 +11,8 @@ data class NetworkTransaction(
     val category: String,
     val comment: String?,
     val amount: Double,
-    @Json(name = "expense") val isExpense: Boolean
-) : Parcelable
+    @SerializedName("expense") val isExpense: Boolean
+)
 
 fun List<NetworkTransaction>.asDatabaseModel(): Array<Transaction>{
     return this.map { transaction ->
