@@ -7,8 +7,9 @@ import com.example.myfinances2020.data.network.TransactionDataSource
 import com.example.myfinances2020.data.network.asDatabaseModel
 import com.example.myfinances2020.utils.getCurrentDate
 import java.util.*
+import javax.inject.Inject
 
-class TransactionsRepository(val database: MyFinancesDatabase){
+class TransactionsRepository @Inject constructor(private val database: MyFinancesDatabase){
 
     private val date = getCurrentDate()
     private val transactionDao = database.transactionDao

@@ -1,10 +1,8 @@
 package com.example.myfinances2020.ui.transactions
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.myfinances2020.data.database.getDatabase
+import androidx.lifecycle.ViewModel
 import com.example.myfinances2020.data.database.repository.TransactionsRepository
 import com.example.myfinances2020.utils.formatDateWithoutDay
 import com.example.myfinances2020.utils.getCurrentDate
@@ -13,14 +11,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.util.*
+import javax.inject.Inject
 
-class TransactionsViewModel(application: Application) : AndroidViewModel(application){
+class TransactionsViewModel @Inject constructor(private val transactionsRepository: TransactionsRepository) : ViewModel(){
 
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-
-    private val database = getDatabase(application)
-    private val transactionsRepository = TransactionsRepository(database)
 
     var transactions = transactionsRepository.transactions
 
