@@ -9,7 +9,8 @@ import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [AndroidSupportInjectionModule::class])
+@Component(modules = [AndroidSupportInjectionModule::class, ActivityBuildersModule::class, AppModule::class,
+    ViewModelFactoryModule::class])
 interface AppComponent : AndroidInjector<MyFinancesApplication>{
 
     @Component.Builder
