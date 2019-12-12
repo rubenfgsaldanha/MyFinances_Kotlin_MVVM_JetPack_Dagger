@@ -1,5 +1,7 @@
 package com.example.myfinances2020.di
 
+import android.app.Application
+import com.example.myfinances2020.data.database.getDatabase
 import com.example.myfinances2020.utils.ENDPOINT
 import com.google.gson.Gson
 import dagger.Module
@@ -27,4 +29,8 @@ class AppModule {
             .addConverterFactory(converterFactory)
             .build()
     }
+
+    @Singleton
+    @Provides
+    fun provideDatabaseInstance(application: Application) = getDatabase(application)
 }
