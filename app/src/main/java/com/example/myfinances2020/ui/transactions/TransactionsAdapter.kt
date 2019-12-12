@@ -1,4 +1,4 @@
-package com.example.myfinances2020.transactions
+package com.example.myfinances2020.ui.transactions
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

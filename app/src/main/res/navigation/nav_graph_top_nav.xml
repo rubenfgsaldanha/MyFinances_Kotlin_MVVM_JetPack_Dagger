@@ -7,10 +7,10 @@
 
     <fragment
         android:id="@+id/aboutFragment"
-        android:name="com.example.myfinances2020.about.AboutFragment"
+        android:name="com.example.myfinances2020.ui.about.AboutFragment"
         android:label="AboutFragment" />
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.myfinances2020.settings.SettingsFragment"
+        android:name="com.example.myfinances2020.ui.settings.SettingsFragment"
         android:label="SettingsFragment" />
 </navigation>

@@ -1,4 +1,4 @@
-package com.example.myfinances2020.graphs
+package com.example.myfinances2020.ui.graphs
 
 import android.os.Bundle
 import android.view.LayoutInflater

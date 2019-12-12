@@ -1,4 +1,4 @@
-package com.example.myfinances2020.transactions.editTransaction
+package com.example.myfinances2020.ui.transactions.editTransaction
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

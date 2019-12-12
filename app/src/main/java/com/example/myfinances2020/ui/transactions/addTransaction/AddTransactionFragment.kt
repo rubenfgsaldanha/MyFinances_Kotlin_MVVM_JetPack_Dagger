@@ -1,4 +1,4 @@
-package com.example.myfinances2020.transactions.addTransaction
+package com.example.myfinances2020.ui.transactions.addTransaction
 
 import android.app.DatePickerDialog
 import android.os.Bundle
