@@ -1,26 +1,21 @@
 package com.example.myfinances2020.ui.transactions.addTransaction
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.myfinances2020.data.database.MyFinancesDatabase
+import androidx.lifecycle.ViewModel
 import com.example.myfinances2020.data.database.entities.Transaction
-import com.example.myfinances2020.data.database.getDatabase
 import com.example.myfinances2020.data.database.repository.TransactionsRepository
 import com.example.myfinances2020.utils.splitDate
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AddTransactionViewModel(application: Application) : AndroidViewModel(application){
+class AddTransactionViewModel @Inject constructor(private val transactionsRepository: TransactionsRepository) : ViewModel(){
 
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-
-    private val database: MyFinancesDatabase = getDatabase(application)
-    private val transactionsRepository = TransactionsRepository(database)
 
     private val _navToTransactionsFragment = MutableLiveData<Boolean>()
     val navToTransactionsFragment: LiveData<Boolean> get() = _navToTransactionsFragment

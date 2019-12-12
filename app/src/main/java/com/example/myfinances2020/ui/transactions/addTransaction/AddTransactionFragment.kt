@@ -12,32 +12,35 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.myfinances2020.R
 import com.example.myfinances2020.databinding.FragmentAddTransactionBinding
+import com.example.myfinances2020.utils.ViewModelProviderFactory
 import com.example.myfinances2020.utils.formatBtnDate
 import com.example.myfinances2020.utils.getCurrentDate
+import dagger.android.support.DaggerFragment
 import java.util.*
+import javax.inject.Inject
 
-class AddTransactionFragment : Fragment(){
+class AddTransactionFragment : DaggerFragment(){
 
     private lateinit var viewModel: AddTransactionViewModel
     private lateinit var binding: FragmentAddTransactionBinding
+
+    @Inject lateinit var providerFactory: ViewModelProviderFactory
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentAddTransactionBinding.inflate(inflater)
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.add_transaction)
 
-        val application = requireNotNull(this.activity).application
-        val viewModelFactory = AddTransactionViewModelFactory(application)
-
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(AddTransactionViewModel::class.java)
-        binding.viewModel = viewModel
-
         binding.lifecycleOwner = this
 
-        setDate()
-
-        setupObservers()
-
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        viewModel = ViewModelProviders.of(this, providerFactory).get(AddTransactionViewModel::class.java)
+        binding.viewModel = viewModel
+
+        setDate()
+        setupObservers()
     }
 
     private fun setDate(){
