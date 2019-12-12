@@ -22,8 +22,8 @@ abstract class TransactionsViewModelsModule{
     @ViewModelKey(AddTransactionViewModel::class)
     abstract fun bindAddTransactionViewModel(viewModel: AddTransactionViewModel) : ViewModel
 
-    @Binds
+    /*@Binds
     @IntoMap
     @ViewModelKey(EditTransactionViewModel::class)
-    abstract fun bindEditTransactionViewModel(viewModel: EditTransactionViewModel) : ViewModel
+    abstract fun bindEditTransactionViewModel(viewModel: EditTransactionViewModel) : ViewModel*/
 }

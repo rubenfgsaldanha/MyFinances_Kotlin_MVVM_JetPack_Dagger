@@ -1,6 +1,6 @@
 package com.example.myfinances2020.di.transactions
 
-import com.example.myfinances2020.data.network.RestApi
+import com.example.myfinances2020.data.network.RestService
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -9,5 +9,5 @@ import retrofit2.Retrofit
 class TransactionsModule {
 
     @Provides
-    fun provideRestApi(retrofit: Retrofit) : RestApi = retrofit.create(RestApi::class.java)
+    fun provideRestApi(retrofit: Retrofit) : RestService = retrofit.create(RestService::class.java)
 }

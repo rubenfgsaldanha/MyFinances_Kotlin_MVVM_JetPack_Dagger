@@ -9,7 +9,7 @@ import com.example.myfinances2020.utils.getCurrentDate
 import java.util.*
 import javax.inject.Inject
 
-class TransactionsRepository @Inject constructor(private val database: MyFinancesDatabase){
+class TransactionsRepository @Inject constructor(private val database: MyFinancesDatabase, private val transactionDataSource: TransactionDataSource?){
 
     private val date = getCurrentDate()
     private val transactionDao = database.transactionDao
@@ -24,10 +24,13 @@ class TransactionsRepository @Inject constructor(private val database: MyFinance
     fun getCurrentMonthTransactions(month: Int, year: Int){ transactions = transactionDao.getTransactionsByMonth(month, year) }
 
     suspend fun refreshTransactions(){
-        val result = TransactionDataSource().getTransactions()
-        if(result is Result.Success){
-            val networkTransactionList = result.data
-            database.transactionDao.insertAll(*networkTransactionList.asDatabaseModel())
+        transactionDataSource?.let {
+            val result = transactionDataSource.getTransactions()
+            if(result is Result.Success){
+                val networkTransactionList = result.data
+                database.transactionDao.clear()
+                database.transactionDao.insertAll(*networkTransactionList.asDatabaseModel())
+            }
         }
     }
 }

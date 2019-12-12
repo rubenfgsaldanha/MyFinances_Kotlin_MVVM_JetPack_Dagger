@@ -2,12 +2,13 @@ package com.example.myfinances2020.data.network
 
 import com.example.myfinances2020.utils.safeNetworkCall
 import java.io.IOException
+import javax.inject.Inject
 
-class TransactionDataSource{
+class TransactionDataSource @Inject constructor(private val restService: RestService){
     suspend fun getTransactions() = safeNetworkCall(networkCall = { requestGetTransactions() }, errorMessage = "Error getting transactions")
 
     private suspend fun requestGetTransactions() : Result<List<NetworkTransaction>>{
-        val response = RestApi.restService.getAllTransactions()
+        val response = restService.getAllTransactions()
 
         if(response.isSuccessful){
             val body = response.body()
