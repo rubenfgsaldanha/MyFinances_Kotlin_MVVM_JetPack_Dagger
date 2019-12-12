@@ -5,9 +5,9 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.myfinances2020.data.database.entities.Transaction
-import com.example.myfinances2020.data.database.getDatabase
-import com.example.myfinances2020.data.database.repository.TransactionsRepository
+import com.example.myfinances2020.repository.database.entities.Transaction
+import com.example.myfinances2020.repository.database.getDatabase
+import com.example.myfinances2020.repository.TransactionsRepository
 import com.example.myfinances2020.utils.splitDate
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

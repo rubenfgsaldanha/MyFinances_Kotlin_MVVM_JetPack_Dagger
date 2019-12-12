@@ -3,7 +3,7 @@ package com.example.myfinances2020.ui.transactions
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.myfinances2020.data.database.repository.TransactionsRepository
+import com.example.myfinances2020.repository.TransactionsRepository
 import com.example.myfinances2020.utils.formatDateWithoutDay
 import com.example.myfinances2020.utils.getCurrentDate
 import kotlinx.coroutines.CoroutineScope

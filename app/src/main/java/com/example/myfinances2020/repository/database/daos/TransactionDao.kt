@@ -1,8 +1,8 @@
-package com.example.myfinances2020.data.database.daos
+package com.example.myfinances2020.repository.database.daos
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.myfinances2020.data.database.entities.Transaction
+import com.example.myfinances2020.repository.database.entities.Transaction
 
 @Dao
 interface TransactionDao {

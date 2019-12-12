@@ -1,11 +1,11 @@
-package com.example.myfinances2020.data.database
+package com.example.myfinances2020.repository.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.myfinances2020.data.database.daos.TransactionDao
-import com.example.myfinances2020.data.database.entities.Transaction
+import com.example.myfinances2020.repository.database.daos.TransactionDao
+import com.example.myfinances2020.repository.database.entities.Transaction
 
 @Database(entities = [Transaction::class], version = 1)
 abstract class MyFinancesDatabase : RoomDatabase(){

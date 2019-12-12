@@ -1,4 +1,4 @@
-package com.example.myfinances2020.data.database.entities
+package com.example.myfinances2020.repository.database.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

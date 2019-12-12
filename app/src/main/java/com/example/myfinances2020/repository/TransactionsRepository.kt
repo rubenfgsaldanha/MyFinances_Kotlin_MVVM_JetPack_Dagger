@@ -1,10 +1,10 @@
-package com.example.myfinances2020.data.database.repository
+package com.example.myfinances2020.repository
 
-import com.example.myfinances2020.data.database.MyFinancesDatabase
-import com.example.myfinances2020.data.database.entities.Transaction
-import com.example.myfinances2020.data.network.Result
-import com.example.myfinances2020.data.network.TransactionDataSource
-import com.example.myfinances2020.data.network.asDatabaseModel
+import com.example.myfinances2020.repository.database.MyFinancesDatabase
+import com.example.myfinances2020.repository.database.entities.Transaction
+import com.example.myfinances2020.repository.network.Result
+import com.example.myfinances2020.repository.network.TransactionDataSource
+import com.example.myfinances2020.repository.network.asDatabaseModel
 import com.example.myfinances2020.utils.getCurrentDate
 import java.util.*
 import javax.inject.Inject

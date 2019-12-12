@@ -1,4 +1,4 @@
-package com.example.myfinances2020.data.network
+package com.example.myfinances2020.repository.network
 
 import com.example.myfinances2020.utils.safeNetworkCall
 import java.io.IOException

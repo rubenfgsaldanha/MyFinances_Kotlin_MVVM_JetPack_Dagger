@@ -1,6 +1,6 @@
-package com.example.myfinances2020.data.network
+package com.example.myfinances2020.repository.network
 
-import com.example.myfinances2020.data.database.entities.Transaction
+import com.example.myfinances2020.repository.database.entities.Transaction
 import com.google.gson.annotations.SerializedName
 
 data class NetworkTransaction(

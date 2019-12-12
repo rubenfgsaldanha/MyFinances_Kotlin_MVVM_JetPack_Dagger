@@ -4,9 +4,9 @@ import android.util.Log
 import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.example.myfinances2020.data.database.MyFinancesDatabase
-import com.example.myfinances2020.data.database.daos.TransactionDao
-import com.example.myfinances2020.data.database.entities.Transaction
+import com.example.myfinances2020.repository.database.MyFinancesDatabase
+import com.example.myfinances2020.repository.database.daos.TransactionDao
+import com.example.myfinances2020.repository.database.entities.Transaction
 import org.junit.After
 import org.junit.Before
 import org.junit.Test

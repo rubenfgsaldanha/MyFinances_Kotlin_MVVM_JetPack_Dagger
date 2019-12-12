@@ -6,7 +6,7 @@
 
         <variable
             name="transaction"
-            type="com.example.myfinances2020.data.database.entities.Transaction" />
+            type="com.example.myfinances2020.repository.database.entities.Transaction" />
 
         <variable
             name="clickListener"

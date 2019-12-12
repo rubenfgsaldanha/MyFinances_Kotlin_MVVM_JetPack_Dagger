@@ -3,8 +3,8 @@ package com.example.myfinances2020.ui.transactions.addTransaction
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.myfinances2020.data.database.entities.Transaction
-import com.example.myfinances2020.data.database.repository.TransactionsRepository
+import com.example.myfinances2020.repository.database.entities.Transaction
+import com.example.myfinances2020.repository.TransactionsRepository
 import com.example.myfinances2020.utils.splitDate
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

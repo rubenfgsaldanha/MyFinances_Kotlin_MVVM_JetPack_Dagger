@@ -4,7 +4,7 @@ import android.graphics.Color
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import com.example.myfinances2020.data.database.entities.Transaction
+import com.example.myfinances2020.repository.database.entities.Transaction
 
 @BindingAdapter("transactionDate")
 fun TextView.setDate(item: Transaction?){

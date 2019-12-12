@@ -1,6 +1,6 @@
 package com.example.myfinances2020.utils
 
-import com.example.myfinances2020.data.network.Result
+import com.example.myfinances2020.repository.network.Result
 import java.io.IOException
 import java.lang.Exception
 
