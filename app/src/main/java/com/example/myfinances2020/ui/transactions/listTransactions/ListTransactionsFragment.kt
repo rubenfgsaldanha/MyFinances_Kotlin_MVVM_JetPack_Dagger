@@ -25,6 +25,7 @@ class ListTransactionsFragment : DaggerFragment(){
 
     @Inject lateinit var providerFactory: ViewModelProviderFactory
 
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentTransactionsBinding.inflate(inflater)
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.app_name)
