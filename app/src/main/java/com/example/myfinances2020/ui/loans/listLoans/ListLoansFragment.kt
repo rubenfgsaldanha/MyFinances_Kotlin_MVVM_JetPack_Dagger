@@ -4,13 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.myfinances2020.R
 import com.example.myfinances2020.databinding.FragmentListLoansBinding
 import com.example.myfinances2020.utils.ViewModelProviderFactory
+import com.example.myfinances2020.utils.formatDateWithoutDay
+import com.example.myfinances2020.utils.getCurrentDate
 import dagger.android.support.DaggerFragment
+import java.util.*
 import javax.inject.Inject
 
 class ListLoansFragment : DaggerFragment(){
@@ -41,6 +46,42 @@ class ListLoansFragment : DaggerFragment(){
     }
 
     private fun setupObservers(){
-        //
+        viewModel.loans.observe(this, Observer { list ->
+            list?.let {
+                val c = getCurrentDate()
+                binding.currentMonthLoans.text = formatDateWithoutDay(c.get(Calendar.MONTH), c.get(Calendar.YEAR))
+                adapter.submitList(list)
+            }
+        })
+
+        viewModel.previousMonthBtnClicked.observe(this, Observer { clicked ->
+            if(clicked){
+                binding.currentMonthLoans.text = viewModel.updatePreviousMonth()
+                viewModel.onPreviousMonthBtnClickFinished()
+            }
+        })
+
+        viewModel.nextMonthBtnClicked.observe(this, Observer { clicked ->
+            if(clicked){
+                binding.currentMonthLoans.text = viewModel.updateNextMonth()
+                viewModel.onNextMonthBtnClickFinished()
+            }
+        })
+
+        viewModel.navToAddLoan.observe(this, Observer { navigate ->
+            if(navigate){
+                //TODO: navigate to add loan
+                Toast.makeText(activity, "AddLoan", Toast.LENGTH_SHORT).show()
+                viewModel.onNavigatedToAddLoan()
+            }
+        })
+
+        viewModel.navToEditLoan.observe(this, Observer { id ->
+            id?.let {
+                //TODO: navigate to edit loan
+                Toast.makeText(activity, "EditLoan", Toast.LENGTH_SHORT).show()
+                viewModel.onNavigatedToEditLoan()
+            }
+        })
     }
 }

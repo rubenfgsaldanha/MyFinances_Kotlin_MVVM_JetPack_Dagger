@@ -5,9 +5,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.example.myfinances2020.repository.database.entities.Transaction
+import com.example.myfinances2020.repository.database.entities.formatDate
 
 @BindingAdapter("transactionDate")
-fun TextView.setDate(item: Transaction?) = item?.let { text = formatDate(item) }
+fun TextView.setDate(item: Transaction?) = item?.let { text = item.formatDate() }
 
 @BindingAdapter("transactionImage")
 fun ImageView.setTransactionImage(item: Transaction?){

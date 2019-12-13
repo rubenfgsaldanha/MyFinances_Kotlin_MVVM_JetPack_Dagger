@@ -30,3 +30,5 @@ data class Transaction(
     @ColumnInfo(name = "is_expense")
     val isExpense: Boolean = true
 )
+
+fun Transaction.formatDate() = "${this.day}/${this.month}/${this.year}"

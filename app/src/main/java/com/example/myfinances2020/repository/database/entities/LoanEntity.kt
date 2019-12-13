@@ -30,3 +30,5 @@ data class Loan(
     @ColumnInfo(name = "is_paid")
     val isPayed: Boolean = false
 )
+
+fun Loan.formatDate() = "${this.day}/${this.month}/${this.year}"
