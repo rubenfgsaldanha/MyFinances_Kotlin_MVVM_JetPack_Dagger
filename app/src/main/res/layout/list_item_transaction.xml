@@ -6,11 +6,11 @@
 
         <variable
             name="transaction"
-            type="com.example.myfinances2020.data.database.entities.Transaction" />
+            type="com.example.myfinances2020.repository.database.entities.Transaction" />
 
         <variable
             name="clickListener"
-            type="com.example.myfinances2020.transactions.TransactionListener" />
+            type="com.example.myfinances2020.ui.transactions.listTransactions.TransactionListener" />
     </data>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"

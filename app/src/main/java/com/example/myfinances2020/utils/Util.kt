@@ -1,6 +1,6 @@
 package com.example.myfinances2020.utils
 
-import com.example.myfinances2020.data.database.entities.Transaction
+import com.example.myfinances2020.repository.database.entities.Transaction
 import java.util.*
 
 fun formatDate(item: Transaction): String = "${item.day}/${item.month}/${item.year}"

@@ -3,12 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".transactions.editTransaction.EditTransactionFragment">
+    tools:context=".ui.transactions.editTransaction.EditTransactionFragment">
 
     <data>
         <variable
             name="viewModel"
-            type="com.example.myfinances2020.transactions.editTransaction.EditTransactionViewModel" />
+            type="com.example.myfinances2020.ui.transactions.editTransaction.EditTransactionViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

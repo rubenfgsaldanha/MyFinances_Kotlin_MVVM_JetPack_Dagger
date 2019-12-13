@@ -6,7 +6,7 @@
     app:startDestination="@id/transactionsFragment">
     <fragment
         android:id="@+id/transactionsFragment"
-        android:name="com.example.myfinances2020.transactions.TransactionsFragment"
+        android:name="com.example.myfinances2020.ui.transactions.listTransactions.ListTransactionsFragment"
         android:label="fragment_transactions"
         tools:layout="@layout/fragment_transactions" >
         <action
@@ -22,15 +22,15 @@
     </fragment>
     <fragment
         android:id="@+id/loansFragment"
-        android:name="com.example.myfinances2020.loans.LoansFragment"
+        android:name="com.example.myfinances2020.ui.loans.listLoans.ListLoansFragment"
         android:label="fragment_loans" />
     <fragment
         android:id="@+id/graphsFragment"
-        android:name="com.example.myfinances2020.graphs.GraphsFragment"
+        android:name="com.example.myfinances2020.ui.graphs.GraphsFragment"
         android:label="fragment_graphs" />
     <fragment
         android:id="@+id/addTransactionFragment"
-        android:name="com.example.myfinances2020.transactions.addTransaction.AddTransactionFragment"
+        android:name="com.example.myfinances2020.ui.transactions.addTransaction.AddTransactionFragment"
         android:label="fragment_add_transaction"
         tools:layout="@layout/fragment_add_transaction" >
         <action
@@ -41,7 +41,7 @@
     </fragment>
     <fragment
         android:id="@+id/editTransactionFragment"
-        android:name="com.example.myfinances2020.transactions.editTransaction.EditTransactionFragment"
+        android:name="com.example.myfinances2020.ui.transactions.editTransaction.EditTransactionFragment"
         android:label="fragment_edit_transaction"
         tools:layout="@layout/fragment_edit_transaction" >
         <argument
@@ -55,10 +55,10 @@
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
-        android:name="com.example.myfinances2020.about.AboutFragment"
+        android:name="com.example.myfinances2020.ui.about.AboutFragment"
         android:label="AboutFragment" />
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.myfinances2020.settings.SettingsFragment"
+        android:name="com.example.myfinances2020.ui.settings.SettingsFragment"
         android:label="SettingsFragment" />
 </navigation>
