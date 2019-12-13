@@ -6,7 +6,7 @@
     app:startDestination="@id/transactionsFragment">
     <fragment
         android:id="@+id/transactionsFragment"
-        android:name="com.example.myfinances2020.ui.transactions.TransactionsFragment"
+        android:name="com.example.myfinances2020.ui.transactions.listTransactions.ListTransactionsFragment"
         android:label="fragment_transactions"
         tools:layout="@layout/fragment_transactions" >
         <action
@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/loansFragment"
-        android:name="com.example.myfinances2020.ui.loans.LoansFragment"
+        android:name="com.example.myfinances2020.ui.loans.listLoans.ListLoansFragment"
         android:label="fragment_loans" />
     <fragment
         android:id="@+id/graphsFragment"

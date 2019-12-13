@@ -1,4 +1,4 @@
-package com.example.myfinances2020.ui.transactions
+package com.example.myfinances2020.ui.transactions.listTransactions
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,10 +9,14 @@ import com.example.myfinances2020.repository.database.entities.Transaction
 import com.example.myfinances2020.databinding.ListItemTransactionBinding
 
 class TransactionsAdapter(private val clickListener: TransactionListener) : ListAdapter<Transaction,
-        TransactionsAdapter.ViewHolder>(TransactionDiffCallback()){
+        TransactionsAdapter.ViewHolder>(
+    TransactionDiffCallback()
+){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder.from(parent)
+        return ViewHolder.from(
+            parent
+        )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -29,11 +33,13 @@ class TransactionsAdapter(private val clickListener: TransactionListener) : List
         }
 
         companion object{
-            fun from(parent: ViewGroup): ViewHolder{
+            fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ListItemTransactionBinding.inflate(layoutInflater, parent, false)
 
-                return ViewHolder(binding)
+                return ViewHolder(
+                    binding
+                )
             }
         }
     }

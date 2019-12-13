@@ -2,9 +2,8 @@ package com.example.myfinances2020.di.transactions
 
 import androidx.lifecycle.ViewModel
 import com.example.myfinances2020.di.ViewModelKey
-import com.example.myfinances2020.ui.transactions.TransactionsViewModel
+import com.example.myfinances2020.ui.transactions.listTransactions.ListTransactionsViewModel
 import com.example.myfinances2020.ui.transactions.addTransaction.AddTransactionViewModel
-import com.example.myfinances2020.ui.transactions.editTransaction.EditTransactionViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -14,8 +13,8 @@ abstract class TransactionsViewModelsModule{
 
     @Binds
     @IntoMap
-    @ViewModelKey(TransactionsViewModel::class)
-    abstract fun bindTransactionsViewModel(viewModel: TransactionsViewModel) : ViewModel
+    @ViewModelKey(ListTransactionsViewModel::class)
+    abstract fun bindTransactionsViewModel(viewModel: ListTransactionsViewModel) : ViewModel
 
     @Binds
     @IntoMap

@@ -1,4 +1,4 @@
-package com.example.myfinances2020.ui.transactions
+package com.example.myfinances2020.ui.transactions.listTransactions
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,10 +17,10 @@ import dagger.android.support.DaggerFragment
 import java.util.*
 import javax.inject.Inject
 
-class TransactionsFragment : DaggerFragment(){
+class ListTransactionsFragment : DaggerFragment(){
 
     private lateinit var binding: FragmentTransactionsBinding
-    private lateinit var viewModel: TransactionsViewModel
+    private lateinit var viewModel: ListTransactionsViewModel
     private lateinit var adapter: TransactionsAdapter
 
     @Inject lateinit var providerFactory: ViewModelProviderFactory
@@ -35,10 +35,16 @@ class TransactionsFragment : DaggerFragment(){
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel = ViewModelProviders.of(this, providerFactory).get(TransactionsViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, providerFactory).get(ListTransactionsViewModel::class.java)
         binding.viewModel = viewModel
 
-        adapter = TransactionsAdapter(TransactionListener { id -> viewModel.onTransactionClicked(id) })
+        adapter =
+            TransactionsAdapter(
+                TransactionListener { id ->
+                    viewModel.onTransactionClicked(
+                        id
+                    )
+                })
         binding.recycleViewTransactions.adapter = adapter
 
         setupObservers()
@@ -69,14 +75,14 @@ class TransactionsFragment : DaggerFragment(){
 
         viewModel.navToAddTransaction.observe(this, Observer { navigate ->
             if(navigate){
-                this.findNavController().navigate(TransactionsFragmentDirections.actionTransactionsFragmentToAddTransactionFragment())
+                this.findNavController().navigate(ListTransactionsFragmentDirections.actionTransactionsFragmentToAddTransactionFragment())
                 viewModel.onNavigatedToAddTransaction()
             }
         })
 
         viewModel.navToEditTransaction.observe(this, Observer { navigate ->
             navigate?.let { id ->
-                this.findNavController().navigate(TransactionsFragmentDirections.actionTransactionsFragmentToEditTransactionFragment(id))
+                this.findNavController().navigate(ListTransactionsFragmentDirections.actionTransactionsFragmentToEditTransactionFragment(id))
                 viewModel.onNavigatedToEditTransaction()
             }
         })

@@ -1,4 +1,4 @@
-package com.example.myfinances2020.ui.transactions
+package com.example.myfinances2020.ui.transactions.listTransactions
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
-class TransactionsViewModel @Inject constructor(private val transactionsRepository: TransactionsRepository) : ViewModel(){
+class ListTransactionsViewModel @Inject constructor(private val transactionsRepository: TransactionsRepository) : ViewModel(){
 
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
