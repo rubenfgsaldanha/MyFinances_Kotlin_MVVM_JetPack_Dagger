@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="loan"
+            type="com.example.myfinances2020.repository.database.entities.Loan" />
+
+        <variable
+            name="clickListener"
+            type="com.example.myfinances2020.ui.loans.listLoans.LoanListener" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="95dp">
+
+        <TextView
+            android:id="@+id/limit"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:paddingStart="@dimen/dimen8"
+            android:layout_alignParentStart="true"
+            android:textSize="18sp"
+            android:background="@color/colorPrimaryLightest"
+            android:textColor="@color/colorPrimary"
+            android:fontFamily="@font/ubuntu"
+            />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/limit"
+            android:layout_marginTop="@dimen/dimen8"
+            android:paddingStart="@dimen/dimen8">
+
+            <ImageView
+                android:id="@+id/loan_item_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_circle"/>
+
+            <TextView
+                android:id="@+id/loanee_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/loan_item_image"
+                android:paddingStart="10dp"
+                android:text="@string/loanee"
+                android:textSize="20sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:fontFamily="@font/ubuntu"/>
+
+            <TextView
+                android:id="@+id/loanee_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/loanee_label"
+                android:layout_marginStart="@dimen/dimen8"
+                android:textSize="20sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:fontFamily="@font/ubuntu"
+                app:loanee="@{loan}"
+                tools:text="some text"/>
+
+            <TextView
+                android:id="@+id/loan_amount_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/loan_item_image"
+                android:layout_below="@id/loanee_label"
+                android:paddingStart="10dp"
+                android:text="@string/loan_amount"
+                android:textSize="20sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:fontFamily="@font/ubuntu"/>
+
+            <TextView
+                android:id="@+id/loan_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/loanee_label"
+                android:layout_toEndOf="@id/loan_amount_label"
+                android:layout_marginStart="@dimen/dimen8"
+                android:textSize="20sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:fontFamily="@font/ubuntu"
+                app:loanAmount="@{loan}"
+                tools:text="some text"/>
+
+            <TextView
+                android:id="@+id/loan_id"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="10dp"
+                android:alpha="0"/>
+        </RelativeLayout>
+    </RelativeLayout>
+</layout>

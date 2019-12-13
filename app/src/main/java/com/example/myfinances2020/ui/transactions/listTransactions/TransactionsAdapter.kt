@@ -9,14 +9,10 @@ import com.example.myfinances2020.repository.database.entities.Transaction
 import com.example.myfinances2020.databinding.ListItemTransactionBinding
 
 class TransactionsAdapter(private val clickListener: TransactionListener) : ListAdapter<Transaction,
-        TransactionsAdapter.ViewHolder>(
-    TransactionDiffCallback()
-){
+        TransactionsAdapter.ViewHolder>(TransactionDiffCallback()){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder.from(
-            parent
-        )
+        return ViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -37,22 +33,16 @@ class TransactionsAdapter(private val clickListener: TransactionListener) : List
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ListItemTransactionBinding.inflate(layoutInflater, parent, false)
 
-                return ViewHolder(
-                    binding
-                )
+                return ViewHolder(binding)
             }
         }
     }
 }
 
 class TransactionDiffCallback : DiffUtil.ItemCallback<Transaction>(){
-    override fun areItemsTheSame(oldItem: Transaction, newItem: Transaction): Boolean {
-        return oldItem._id == newItem._id
-    }
+    override fun areItemsTheSame(oldItem: Transaction, newItem: Transaction) = oldItem._id == newItem._id
 
-    override fun areContentsTheSame(oldItem: Transaction, newItem: Transaction): Boolean {
-        return oldItem == newItem
-    }
+    override fun areContentsTheSame(oldItem: Transaction, newItem: Transaction) = oldItem == newItem
 }
 
 class TransactionListener(val clickListener: (transactionId: Long) -> Unit){

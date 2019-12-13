@@ -8,7 +8,7 @@
         android:id="@+id/transactionsFragment"
         android:name="com.example.myfinances2020.ui.transactions.listTransactions.ListTransactionsFragment"
         android:label="fragment_transactions"
-        tools:layout="@layout/fragment_transactions" >
+        tools:layout="@layout/fragment_list_transactions" >
         <action
             android:id="@+id/action_transactionsFragment_to_addTransactionFragment"
             app:destination="@id/addTransactionFragment"

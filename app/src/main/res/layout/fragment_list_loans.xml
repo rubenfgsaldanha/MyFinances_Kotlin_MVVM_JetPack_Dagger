@@ -5,6 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.loans.listLoans.ListLoansFragment">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.myfinances2020.ui.loans.listLoans.ListLoansViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/fragment_loans_root"
         android:layout_width="match_parent"

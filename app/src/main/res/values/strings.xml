@@ -129,4 +129,6 @@
     <string name="transaction_type">Transaction type</string>
     <string name="make_current_Wallet">Make this the current wallet?</string>
     <string name="currency">Currency</string>
+    <string name="loanee">Loanee:</string>
+    <string name="loan_amount">Loan amount:</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.example.myfinances2020.repository.network
+package com.example.myfinances2020.repository.network.transactions
 
 import com.example.myfinances2020.repository.database.entities.Transaction
 import com.google.gson.annotations.SerializedName
@@ -14,8 +14,8 @@ data class NetworkTransaction(
     @SerializedName("expense") val isExpense: Boolean
 )
 
-fun List<NetworkTransaction>.asDatabaseModel(): Array<Transaction>{
-    return this.map { transaction ->
+fun List<NetworkTransaction>.asDatabaseModel() =
+    this.map { transaction ->
         Transaction(
             _id = transaction._id,
             day = transaction.day,
@@ -27,4 +27,4 @@ fun List<NetworkTransaction>.asDatabaseModel(): Array<Transaction>{
             isExpense = transaction.isExpense
         )
     }.toTypedArray()
-}
+

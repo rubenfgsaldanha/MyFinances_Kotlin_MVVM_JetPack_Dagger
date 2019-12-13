@@ -7,9 +7,7 @@ import androidx.databinding.BindingAdapter
 import com.example.myfinances2020.repository.database.entities.Transaction
 
 @BindingAdapter("transactionDate")
-fun TextView.setDate(item: Transaction?){
-    item?.let { text = formatDate(item) }
-}
+fun TextView.setDate(item: Transaction?) = item?.let { text = formatDate(item) }
 
 @BindingAdapter("transactionImage")
 fun ImageView.setTransactionImage(item: Transaction?){
@@ -29,11 +27,7 @@ fun TextView.setCategoryOrComment(item: Transaction?){
 }
 
 @BindingAdapter("transactionAmount")
-fun TextView.setAmount(item: Transaction?){
-    item?.let { text = item.amount.toString() }
-}
+fun TextView.setAmount(item: Transaction?) = item?.let { text = item.amount.toString() }
 
 @BindingAdapter("transactionComment")
-fun TextView.setComment(item: Transaction?){
-    item?.let { text = item.comment }
-}
+fun TextView.setComment(item: Transaction?) = item?.let { text = item.comment }

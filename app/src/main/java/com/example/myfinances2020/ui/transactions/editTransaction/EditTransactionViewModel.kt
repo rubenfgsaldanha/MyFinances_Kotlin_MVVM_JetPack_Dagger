@@ -20,7 +20,7 @@ class EditTransactionViewModel(private val transactionId: Long = 0L, application
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     private val database = getDatabase(application)
-    private val transactionsRepository = TransactionsRepository(database, null)
+    private val transactionsRepository = TransactionsRepository(database.transactionDao, null)
 
     private val _transaction = MediatorLiveData<Transaction>()
     val transaction: LiveData<Transaction> get() = _transaction
