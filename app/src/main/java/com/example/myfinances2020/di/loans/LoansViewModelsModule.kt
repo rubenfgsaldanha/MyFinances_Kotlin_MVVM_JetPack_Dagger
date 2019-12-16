@@ -2,6 +2,7 @@ package com.example.myfinances2020.di.loans
 
 import androidx.lifecycle.ViewModel
 import com.example.myfinances2020.di.ViewModelKey
+import com.example.myfinances2020.ui.loans.addLoan.AddLoanViewModel
 import com.example.myfinances2020.ui.loans.listLoans.ListLoansViewModel
 import dagger.Binds
 import dagger.Module
@@ -14,4 +15,9 @@ abstract class LoansViewModelsModule {
     @IntoMap
     @ViewModelKey(ListLoansViewModel::class)
     abstract fun bindListLoansViewModule(viewModel: ListLoansViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AddLoanViewModel::class)
+    abstract fun bindAddLoanViewModule(viewModel: AddLoanViewModel) : ViewModel
 }

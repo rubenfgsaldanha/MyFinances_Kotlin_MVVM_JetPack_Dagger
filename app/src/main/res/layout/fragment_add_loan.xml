@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.loans.addLoan.AddLoanFragment">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.myfinances2020.ui.loans.addLoan.AddLoanViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/dimen16"
+        android:id="@+id/add_loan_layout">
+
+        <TextView
+            android:id="@+id/date_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen8"
+            android:text="@string/date"
+            android:fontFamily="@font/ubuntu"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"/>
+
+        <Button
+            android:id="@+id/btn_loan_date"
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            android:layout_below="@id/date_txt"
+            android:layout_marginBottom="@dimen/dimen16"
+            android:fontFamily="@font/ubuntu"
+            android:textColor="@color/colorPrimaryDark"
+            android:backgroundTint="@color/colorSecondary"
+            android:onClick="@{() -> viewModel.onPickDate()}"/>
+
+        <TextView
+            android:id="@+id/text_lender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_loan_date"
+            android:layout_marginBottom="@dimen/dimen8"
+            android:text="@string/loan_type"
+            android:textStyle="bold"
+            android:fontFamily="@font/ubuntu"
+            android:textSize="17sp"
+            android:textColor="@color/colorPrimary"/>
+
+        <RadioGroup
+            android:id="@+id/lenderRadioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_lender"
+            android:layout_marginBottom="@dimen/dimen16"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/lender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/dimen16"
+                android:text="@string/lender"
+                android:fontFamily="@font/ubuntu"
+                android:textColor="@color/colorPrimary"
+                android:onClick="@{() -> viewModel.onIsLenderClicked()}"/>
+
+            <RadioButton
+                android:id="@+id/lendee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lendee"
+                android:fontFamily="@font/ubuntu"
+                android:textColor="@color/colorPrimary"
+                android:onClick="@{() -> viewModel.onIsLendeeClicked()}"/>
+        </RadioGroup>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lenderRadioGroup">
+
+            <EditText
+                android:id="@+id/add_loan_amount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/amount"
+                android:fontFamily="@font/ubuntu"
+                android:layout_marginBottom="@dimen/dimen16"
+                android:inputType="numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/input_thirdPArty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/input_amount">
+
+            <EditText
+                android:id="@+id/thirdP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/input_amount"
+                android:layout_marginBottom="@dimen/dimen16"
+                android:hint="@string/thirdP"
+                android:fontFamily="@font/ubuntu"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/button_save_loan"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_below="@id/input_thirdPArty"
+            android:text="@string/save"
+            android:textColor="@color/colorPrimary"
+            android:textAllCaps="false"
+            android:fontFamily="@font/ubuntu"
+            android:textSize="15sp"
+            android:backgroundTint="@color/colorSecondary"
+            android:onClick="@{() -> viewModel.onReturnToLoansFragment()}"/>
+    </RelativeLayout>
+</layout>

@@ -8,7 +8,7 @@ import com.example.myfinances2020.repository.database.entities.Loan
 import com.example.myfinances2020.repository.database.entities.formatDate
 
 @BindingAdapter("loanee")
-fun TextView.setLoanee(item: Loan?) = item?.let { text = item.loanee }
+fun TextView.setLoanee(item: Loan?) = item?.let { text = item.thirdParty }
 
 @BindingAdapter("loanAmount")
 fun TextView.setLoanAmount(item: Loan?) = item?.let { text = item.amount.toString() }

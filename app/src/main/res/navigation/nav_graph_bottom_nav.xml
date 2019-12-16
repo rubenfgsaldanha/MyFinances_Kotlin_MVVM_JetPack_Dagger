@@ -23,7 +23,15 @@
     <fragment
         android:id="@+id/loansFragment"
         android:name="com.example.myfinances2020.ui.loans.listLoans.ListLoansFragment"
-        android:label="fragment_loans" />
+        android:label="fragment_loans" >
+        <action
+            android:id="@+id/action_loansFragment_to_addLoanFragment"
+            app:destination="@id/addLoanFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
     <fragment
         android:id="@+id/graphsFragment"
         android:name="com.example.myfinances2020.ui.graphs.GraphsFragment"
@@ -61,4 +69,15 @@
         android:id="@+id/settingsFragment"
         android:name="com.example.myfinances2020.ui.settings.SettingsFragment"
         android:label="SettingsFragment" />
+    <fragment
+        android:id="@+id/addLoanFragment"
+        android:name="com.example.myfinances2020.ui.loans.addLoan.AddLoanFragment"
+        android:label="fragment_add_loan"
+        tools:layout="@layout/fragment_add_loan" >
+        <action
+            android:id="@+id/action_addLoanFragment_to_loansFragment"
+            app:destination="@id/loansFragment"
+            app:popUpTo="@+id/loansFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

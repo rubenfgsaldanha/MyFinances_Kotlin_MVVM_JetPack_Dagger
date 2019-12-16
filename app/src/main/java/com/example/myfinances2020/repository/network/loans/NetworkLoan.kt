@@ -23,7 +23,7 @@ fun List<NetworkLoan>.asDatabaseModel() =
             year = loan.year,
             isLender = loan.isLender,
             amount = loan.amount,
-            loanee = loan.loanee,
+            thirdParty = loan.loanee,
             isPayed = loan.isPayed
         )
     }.toTypedArray()

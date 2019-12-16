@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.example.myfinances2020.R
 import com.example.myfinances2020.databinding.FragmentListLoansBinding
 import com.example.myfinances2020.utils.ViewModelProviderFactory
@@ -70,8 +71,7 @@ class ListLoansFragment : DaggerFragment(){
 
         viewModel.navToAddLoan.observe(this, Observer { navigate ->
             if(navigate){
-                //TODO: navigate to add loan
-                Toast.makeText(activity, "AddLoan", Toast.LENGTH_SHORT).show()
+                this.findNavController().navigate(ListLoansFragmentDirections.actionLoansFragmentToAddLoanFragment())
                 viewModel.onNavigatedToAddLoan()
             }
         })

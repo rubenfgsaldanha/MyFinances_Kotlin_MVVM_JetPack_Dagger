@@ -25,7 +25,7 @@ data class Loan(
     val amount: Double = 0.0,
 
     @ColumnInfo(name = "lonee")
-    val loanee: String,
+    val thirdParty: String,
 
     @ColumnInfo(name = "is_paid")
     val isPayed: Boolean = false

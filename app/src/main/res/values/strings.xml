@@ -95,6 +95,8 @@
 
     <string name="add_transaction">Add Transaction</string>
     <string name="edit_transaction">Edit Transaction</string>
+    <string name="add_loan">Add Loan</string>
+    <string name="edit_loan">Edit Loan</string>
 
 
     <!-- menu -->
