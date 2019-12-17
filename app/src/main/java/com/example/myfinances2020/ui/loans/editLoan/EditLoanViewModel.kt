@@ -35,7 +35,7 @@ class EditLoanViewModel(private val loanId: Long = 0L, application: Application)
     val pickDate: LiveData<Boolean> get() = _pickDate
 
     private var isLoaner = true
-    private var isLoanPayed = false
+    private var isLoanPaid = false
 
     init {
         getLoanFromDb()
@@ -49,7 +49,7 @@ class EditLoanViewModel(private val loanId: Long = 0L, application: Application)
 
     fun updateLoan(dateString: String, amount: Double, thirdParty: String){
         val date = splitDate(dateString)
-        val l = Loan(_loan.value!!._id, date[0].toInt(), date[1].toInt(), date[2].toInt(), isLoaner, amount, thirdParty, isLoanPayed)
+        val l = Loan(_loan.value!!._id, date[0].toInt(), date[1].toInt(), date[2].toInt(), isLoaner, amount, thirdParty, isLoanPaid)
 
         uiScope.launch { loanRepository.updateLoan(l) }
         onReturnToLoansFragment()
@@ -77,11 +77,11 @@ class EditLoanViewModel(private val loanId: Long = 0L, application: Application)
     }
 
     fun onIsPayedClicked(){
-        isLoanPayed = true
+        isLoanPaid = true
     }
 
     fun onIsNotPayedClicked(){
-        isLoanPayed = false
+        isLoanPaid = false
     }
 
     fun onUpdate(){

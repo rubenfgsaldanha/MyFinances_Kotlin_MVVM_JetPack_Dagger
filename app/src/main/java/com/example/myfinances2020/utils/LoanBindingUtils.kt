@@ -7,7 +7,7 @@ import androidx.databinding.BindingAdapter
 import com.example.myfinances2020.repository.database.entities.Loan
 import com.example.myfinances2020.repository.database.entities.formatDate
 
-@BindingAdapter("loanee")
+@BindingAdapter("thirdParty")
 fun TextView.setLoanee(item: Loan?) = item?.let { text = item.thirdParty }
 
 @BindingAdapter("loanAmount")

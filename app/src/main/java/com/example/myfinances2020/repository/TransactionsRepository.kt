@@ -30,7 +30,6 @@ class TransactionsRepository @Inject constructor(private val transactionDao: Tra
             val result = transactionDataSource.getTransactions()
             if(result is Result.Success){
                 val networkTransactionList = result.data
-                transactionDao.clear()
                 transactionDao.insertAll(*networkTransactionList.asDatabaseModel())
             }
         }

@@ -29,7 +29,6 @@ class LoansRepository @Inject constructor(private val loanDao: LoanDao, private 
             val result = loanDataSource.getLoans()
             if(result is Result.Success){
                 val networkLoanList = result.data
-                loanDao.clear()
                 loanDao.insertAll(*networkLoanList.asDatabaseModel())
             }
         }

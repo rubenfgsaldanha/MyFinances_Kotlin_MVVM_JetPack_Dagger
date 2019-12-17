@@ -65,7 +65,7 @@
                 android:textSize="20sp"
                 android:textColor="@color/colorPrimaryDark"
                 android:fontFamily="@font/ubuntu"
-                app:loanee="@{loan}"
+                app:thirdParty="@{loan}"
                 tools:text="some text"/>
 
             <TextView

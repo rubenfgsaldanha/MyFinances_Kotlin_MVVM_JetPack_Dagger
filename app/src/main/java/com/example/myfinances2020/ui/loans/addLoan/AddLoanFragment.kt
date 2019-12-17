@@ -55,18 +55,12 @@ class AddLoanFragment : DaggerFragment(){
             }
         })
 
-        viewModel.navToLoansFragment.observe(this, Observer {
-            createLoan()
-
-            //If I do in the same way as in AddTransactionFragment, it won't work, and I don't know why
-            //but this exact way works here
-            if(findNavController().currentDestination?.id == R.id.addLoanFragment){
-                viewModel.onReturnedToLoansFragment()
+        viewModel.navToLoansFragment.observe(this, Observer { navigate ->
+            if(navigate){
+                createLoan()
                 findNavController().navigate(AddLoanFragmentDirections.actionAddLoanFragmentToLoansFragment())
+                viewModel.onReturnedToLoansFragment()
             }
-
-            /*findNavController().navigate(AddLoanFragmentDirections.actionAddLoanFragmentToLoansFragment())
-            viewModel.onReturnedToLoansFragment()*/
         })
     }
 

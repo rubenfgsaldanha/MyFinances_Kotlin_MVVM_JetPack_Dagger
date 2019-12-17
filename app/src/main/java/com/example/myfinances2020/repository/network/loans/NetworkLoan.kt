@@ -10,8 +10,8 @@ class NetworkLoan (
     val year: Int,
     @SerializedName("lender") val isLender: Boolean,
     val amount: Double,
-    val loanee: String,
-    @SerializedName("paid") val isPayed: Boolean
+    val thirdParty: String,
+    @SerializedName("paid") val isPaid: Boolean
 )
 
 fun List<NetworkLoan>.asDatabaseModel() =
@@ -23,7 +23,7 @@ fun List<NetworkLoan>.asDatabaseModel() =
             year = loan.year,
             isLender = loan.isLender,
             amount = loan.amount,
-            thirdParty = loan.loanee,
-            isPayed = loan.isPayed
+            thirdParty = loan.thirdParty,
+            isPayed = loan.isPaid
         )
     }.toTypedArray()

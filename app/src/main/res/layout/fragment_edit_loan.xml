@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.loans.editLoan.EditLoanFragment">
 
     <data>
@@ -36,7 +36,8 @@
             android:fontFamily="@font/ubuntu"
             android:textColor="@color/colorPrimaryDark"
             android:backgroundTint="@color/colorSecondary"
-            android:onClick="@{() -> viewModel.onPickDate()}"/>
+            android:onClick="@{() -> viewModel.onPickDate()}"
+            app:loanDate="@{viewModel.loan}"/>
 
         <TextView
             android:id="@+id/text_lender"
@@ -133,7 +134,8 @@
                 android:fontFamily="@font/ubuntu"
                 android:layout_marginBottom="@dimen/dimen16"
                 android:inputType="numberDecimal"
-                android:textColorHint="@color/colorPrimaryLight"/>
+                android:textColorHint="@color/colorPrimaryLight"
+                app:loanAmount="@{viewModel.loan}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -150,7 +152,8 @@
                 android:hint="@string/thirdP"
                 android:fontFamily="@font/ubuntu"
                 android:inputType="text"
-                android:textColorHint="@color/colorPrimaryLight"/>
+                android:textColorHint="@color/colorPrimaryLight"
+                app:thirdParty="@{viewModel.loan}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
