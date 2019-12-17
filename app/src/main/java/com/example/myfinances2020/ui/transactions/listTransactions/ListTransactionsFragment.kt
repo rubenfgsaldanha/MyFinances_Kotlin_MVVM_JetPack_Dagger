@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.myfinances2020.R
-import com.example.myfinances2020.databinding.FragmentTransactionsBinding
+import com.example.myfinances2020.databinding.FragmentListTransactionsBinding
 import com.example.myfinances2020.utils.ViewModelProviderFactory
 import com.example.myfinances2020.utils.formatDateWithoutDay
 import com.example.myfinances2020.utils.getCurrentDate
@@ -19,7 +19,7 @@ import javax.inject.Inject
 
 class ListTransactionsFragment : DaggerFragment(){
 
-    private lateinit var binding: FragmentTransactionsBinding
+    private lateinit var binding: FragmentListTransactionsBinding
     private lateinit var viewModel: ListTransactionsViewModel
     private lateinit var adapter: TransactionsAdapter
 
@@ -27,7 +27,7 @@ class ListTransactionsFragment : DaggerFragment(){
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = FragmentTransactionsBinding.inflate(inflater)
+        binding = FragmentListTransactionsBinding.inflate(inflater)
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.app_name)
 
         binding.lifecycleOwner = this
@@ -39,13 +39,7 @@ class ListTransactionsFragment : DaggerFragment(){
         viewModel = ViewModelProviders.of(this, providerFactory).get(ListTransactionsViewModel::class.java)
         binding.viewModel = viewModel
 
-        adapter =
-            TransactionsAdapter(
-                TransactionListener { id ->
-                    viewModel.onTransactionClicked(
-                        id
-                    )
-                })
+        adapter = TransactionsAdapter(TransactionListener { id -> viewModel.onTransactionClicked(id) })
         binding.recycleViewTransactions.adapter = adapter
 
         setupObservers()

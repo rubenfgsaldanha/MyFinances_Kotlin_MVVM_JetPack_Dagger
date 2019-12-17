@@ -1,4 +1,4 @@
-package com.example.myfinances2020.ui.transactions.addTransaction
+package com.example.myfinances2020.ui.loans.addLoan
 
 import android.app.DatePickerDialog
 import android.os.Bundle
@@ -10,7 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.myfinances2020.R
-import com.example.myfinances2020.databinding.FragmentAddTransactionBinding
+import com.example.myfinances2020.databinding.FragmentAddLoanBinding
 import com.example.myfinances2020.utils.ViewModelProviderFactory
 import com.example.myfinances2020.utils.formatBtnDate
 import com.example.myfinances2020.utils.getCurrentDate
@@ -18,16 +18,16 @@ import dagger.android.support.DaggerFragment
 import java.util.*
 import javax.inject.Inject
 
-class AddTransactionFragment : DaggerFragment(){
+class AddLoanFragment : DaggerFragment(){
 
-    private lateinit var viewModel: AddTransactionViewModel
-    private lateinit var binding: FragmentAddTransactionBinding
+    private lateinit var viewModel: AddLoanViewModel
+    private lateinit var binding: FragmentAddLoanBinding
 
     @Inject lateinit var providerFactory: ViewModelProviderFactory
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = FragmentAddTransactionBinding.inflate(inflater)
-        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.add_transaction)
+        binding = FragmentAddLoanBinding.inflate(inflater)
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.add_loan)
 
         binding.lifecycleOwner = this
 
@@ -35,16 +35,16 @@ class AddTransactionFragment : DaggerFragment(){
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel = ViewModelProviders.of(this, providerFactory).get(AddTransactionViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, providerFactory).get(AddLoanViewModel::class.java)
         binding.viewModel = viewModel
 
         setDate()
         setupObservers()
     }
 
-    private fun setDate(){
+    private fun setDate() {
         val c = getCurrentDate()
-        binding.btnDate.text = formatBtnDate(c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.MONTH), c.get(Calendar.YEAR))
+        binding.btnLoanDate.text = formatBtnDate(c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.MONTH), c.get(Calendar.YEAR))
     }
 
     private fun setupObservers() {
@@ -55,11 +55,11 @@ class AddTransactionFragment : DaggerFragment(){
             }
         })
 
-        viewModel.navToTransactionsFragment.observe(this, Observer { navigate ->
+        viewModel.navToLoansFragment.observe(this, Observer { navigate ->
             if(navigate){
-                createTransaction()
-                findNavController().navigate(AddTransactionFragmentDirections.actionAddTransactionFragmentToTransactionsFragment())
-                viewModel.onReturnedToTransactionsFragment()
+                createLoan()
+                findNavController().navigate(AddLoanFragmentDirections.actionAddLoanFragmentToLoansFragment())
+                viewModel.onReturnedToLoansFragment()
             }
         })
     }
@@ -67,18 +67,18 @@ class AddTransactionFragment : DaggerFragment(){
     private fun pickDate(){
         val c = getCurrentDate()
 
-        val datePicker = DatePickerDialog(context!!, DatePickerDialog.OnDateSetListener{ _, chosenYear, chosenMonth, chosenDay ->
-            binding.btnDate.text = formatBtnDate(chosenDay, chosenMonth, chosenYear)
+        val datePicker = DatePickerDialog(context!!, DatePickerDialog.OnDateSetListener { _, chosenYear, chosenMonth, chosenDay ->
+            binding.btnLoanDate.text = formatBtnDate(chosenDay, chosenMonth, chosenYear)
         }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH))
 
         datePicker.show()
     }
 
-    private fun createTransaction(){
-        val date = binding.btnDate.text.toString()
-        val comment = binding.comment.text.toString()
-        val amount = binding.amount.text.toString().toDouble()
+    private fun createLoan(){
+        val date = binding.btnLoanDate.text.toString()
+        val amount = binding.addLoanAmount.text.toString().toDouble()
+        val thirdParty = binding.thirdP.text.toString()
 
-        viewModel.insertTransaction(date, comment, amount)
+        viewModel.insertLoan(date, amount, thirdParty)
     }
 }

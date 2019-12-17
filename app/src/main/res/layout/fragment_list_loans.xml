@@ -5,6 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.loans.listLoans.ListLoansFragment">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.myfinances2020.ui.loans.listLoans.ListLoansViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/fragment_loans_root"
         android:layout_width="match_parent"
@@ -26,7 +32,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:background="@color/colorPrimary"
-                android:src="@drawable/ic_action_back" />
+                android:src="@drawable/ic_action_back"
+                android:onClick="@{() -> viewModel.onPreviousMonthBtnClicked()}"/>
 
             <TextView
                 android:id="@+id/current_month_loans"
@@ -48,7 +55,8 @@
                 android:layout_centerVertical="true"
                 android:layout_toEndOf="@id/current_month_loans"
                 android:background="@color/colorPrimary"
-                android:src="@drawable/ic_action_forward" />
+                android:src="@drawable/ic_action_forward"
+                android:onClick="@{() -> viewModel.onNextMonthBtnClicked()}"/>
         </RelativeLayout>
 
 
@@ -59,7 +67,8 @@
             android:scrollbars="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/second_bar_loans"/>
+            app:layout_constraintTop_toBottomOf="@+id/second_bar_loans"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
         <TextView
             android:id="@+id/noRecords_loans"
@@ -84,6 +93,7 @@
             android:src="@drawable/ic_fab_add"
             android:tint="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            android:onClick="@{() -> viewModel.onFabClicked()}"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -8,7 +8,7 @@
         android:id="@+id/transactionsFragment"
         android:name="com.example.myfinances2020.ui.transactions.listTransactions.ListTransactionsFragment"
         android:label="fragment_transactions"
-        tools:layout="@layout/fragment_transactions" >
+        tools:layout="@layout/fragment_list_transactions" >
         <action
             android:id="@+id/action_transactionsFragment_to_addTransactionFragment"
             app:destination="@id/addTransactionFragment"
@@ -23,7 +23,18 @@
     <fragment
         android:id="@+id/loansFragment"
         android:name="com.example.myfinances2020.ui.loans.listLoans.ListLoansFragment"
-        android:label="fragment_loans" />
+        android:label="fragment_loans" >
+        <action
+            android:id="@+id/action_loansFragment_to_addLoanFragment"
+            app:destination="@id/addLoanFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_loansFragment_to_editLoanFragment"
+            app:destination="@id/editLoanFragment" />
+    </fragment>
     <fragment
         android:id="@+id/graphsFragment"
         android:name="com.example.myfinances2020.ui.graphs.GraphsFragment"
@@ -61,4 +72,26 @@
         android:id="@+id/settingsFragment"
         android:name="com.example.myfinances2020.ui.settings.SettingsFragment"
         android:label="SettingsFragment" />
+    <fragment
+        android:id="@+id/addLoanFragment"
+        android:name="com.example.myfinances2020.ui.loans.addLoan.AddLoanFragment"
+        android:label="fragment_add_loan"
+        tools:layout="@layout/fragment_add_loan" >
+        <action
+            android:id="@+id/action_addLoanFragment_to_loansFragment"
+            app:destination="@id/loansFragment"
+            app:popUpTo="@+id/loansFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/editLoanFragment"
+        android:name="com.example.myfinances2020.ui.loans.editLoan.EditLoanFragment"
+        android:label="EditLoanFragment" >
+        <argument
+            android:name="loanId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_editLoanFragment_to_loansFragment"
+            app:destination="@id/loansFragment" />
+    </fragment>
 </navigation>

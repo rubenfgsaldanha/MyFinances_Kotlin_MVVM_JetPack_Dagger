@@ -45,9 +45,7 @@ class ListTransactionsViewModel @Inject constructor(private val transactionsRepo
     }
 
     private fun refreshTransactions() {
-        uiScope.launch {
-            transactionsRepository.refreshTransactions()
-        }
+        uiScope.launch { transactionsRepository.refreshTransactions() }
     }
 
 
