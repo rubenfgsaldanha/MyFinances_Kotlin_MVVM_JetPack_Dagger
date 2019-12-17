@@ -44,7 +44,7 @@ class EditTransactionViewModel(private val transactionId: Long = 0L, application
     fun getTransaction() = _transaction
 
     private fun getTransactionFromDb() {
-        _transaction.addSource(database.transactionDao.getTransactionById(transactionId), _transaction::setValue)
+        _transaction.addSource(transactionsRepository.getTransactionById(transactionId), _transaction::setValue)
     }
 
     fun updateTransaction(dateString: String, amount: Double, comment: String){

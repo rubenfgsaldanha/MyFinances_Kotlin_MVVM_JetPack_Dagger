@@ -21,6 +21,8 @@ class TransactionsRepository @Inject constructor(private val transactionDao: Tra
 
     suspend fun deleteTransactionById(id: Long) = transactionDao.deleteTransactionById(id)
 
+    fun getTransactionById(id: Long) = transactionDao.getTransactionById(id)
+
     fun getCurrentMonthTransactions(month: Int, year: Int){ transactions = transactionDao.getTransactionsByMonth(month, year) }
 
     suspend fun refreshTransactions(){

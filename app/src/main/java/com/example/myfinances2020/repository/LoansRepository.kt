@@ -20,6 +20,8 @@ class LoansRepository @Inject constructor(private val loanDao: LoanDao, private 
 
     suspend fun deleteLoanById(id: Long) = loanDao.deleteLoanById(id)
 
+    fun getLoanById(id: Long) = loanDao.getLoanById(id)
+
     fun getCurrentMonthLoans(month: Int, year: Int) = loanDao.getLoansByMonth(month, year)
 
     suspend fun refreshLoans(){

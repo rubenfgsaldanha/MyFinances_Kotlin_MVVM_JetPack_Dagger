@@ -1,4 +1,4 @@
-package com.example.myfinances2020.ui.transactions.editTransaction
+package com.example.myfinances2020.ui.loans.editLoan
 
 import android.app.DatePickerDialog
 import android.os.Bundle
@@ -11,25 +11,25 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.myfinances2020.R
-import com.example.myfinances2020.databinding.FragmentEditTransactionBinding
+import com.example.myfinances2020.databinding.FragmentEditLoanBinding
 import com.example.myfinances2020.utils.formatBtnDate
 import com.example.myfinances2020.utils.getCurrentDate
 import java.util.*
 
-class EditTransactionFragment : Fragment(){
+class EditLoanFragment : Fragment(){
 
-    private lateinit var viewModel: EditTransactionViewModel
-    private lateinit var binding: FragmentEditTransactionBinding
+    private lateinit var viewModel: EditLoanViewModel
+    private lateinit var binding: FragmentEditLoanBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?{
-        binding = FragmentEditTransactionBinding.inflate(inflater)
+        binding = FragmentEditLoanBinding.inflate(inflater)
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.edit_transaction)
 
         val application = requireNotNull(this.activity).application
-        val arguments =  EditTransactionFragmentArgs.fromBundle(arguments!!)
-        val viewModelFactory = EditTransactionViewModelFactory(arguments.transactionId, application)
+        val arguments =  EditLoanFragmentArgs.fromBundle(arguments!!)
+        val viewModelFactory = EditTransactionViewModelFactory(arguments.loanId, application)
 
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(EditTransactionViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(EditLoanViewModel::class.java)
         binding.viewModel = viewModel
 
         binding.lifecycleOwner = this
@@ -40,10 +40,12 @@ class EditTransactionFragment : Fragment(){
     }
 
     private fun setupObservers() {
-        viewModel.transaction.observe(this, Observer { transaction ->
-            transaction?.let {
-                binding.expense.isChecked = transaction.isExpense
-                binding.income.isChecked = !transaction.isExpense
+        viewModel.loan.observe(this, Observer { loan ->
+            loan?.let {
+                binding.editlender.isChecked = loan.isLender
+                binding.editlendee.isChecked = !loan.isLender
+                binding.payed.isChecked = loan.isPayed
+                binding.notPayed.isChecked = !loan.isPayed
             }
         })
 
@@ -56,15 +58,15 @@ class EditTransactionFragment : Fragment(){
 
         viewModel.update.observe(this, Observer { update ->
             if(update){
-                updateTransactionValues()
+                updateLoanValues()
                 viewModel.onUpdated()
             }
         })
 
-        viewModel.navToTransactionsFragment.observe(this, Observer { navigate ->
-            if(navigate){
-                findNavController().navigate(EditTransactionFragmentDirections.actionEditTransactionFragmentToTransactionsFragment())
-                viewModel.onReturnedToTransactionsFragment()
+        viewModel.navToLoansFragment.observe(this, Observer { navigate ->
+            if (navigate){
+                findNavController().navigate(EditLoanFragmentDirections.actionEditLoanFragmentToLoansFragment())
+                viewModel.onReturnedToLoansFragment()
             }
         })
     }
@@ -73,16 +75,16 @@ class EditTransactionFragment : Fragment(){
         val c = getCurrentDate()
 
         val datePicker = DatePickerDialog(context!!, DatePickerDialog.OnDateSetListener{ _, chosenYear, chosenMonth, chosenDay ->
-            binding.btnDate.text = formatBtnDate(chosenDay, chosenMonth, chosenYear)
+            binding.btnEditLoanDate.text = formatBtnDate(chosenDay, chosenMonth, chosenYear)
         }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH))
 
         datePicker.show()
     }
 
-    private fun updateTransactionValues(){
-        val date = binding.btnDate.text.toString()
-        val amount = binding.amount.text.toString().toDouble()
-        val comment = binding.comment.text.toString()
-        viewModel.updateTransaction(date, amount, comment)
+    private fun updateLoanValues(){
+        val date = binding.btnEditLoanDate.text.toString()
+        val amount = binding.editLoanAmount.text.toString().toDouble()
+        val thirdParty = binding.editthirdP.text.toString()
+        viewModel.updateLoan(date, amount, thirdParty)
     }
 }

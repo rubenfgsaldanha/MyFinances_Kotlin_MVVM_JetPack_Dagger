@@ -71,15 +71,14 @@ class ListLoansFragment : DaggerFragment(){
 
         viewModel.navToAddLoan.observe(this, Observer { navigate ->
             if(navigate){
-                this.findNavController().navigate(ListLoansFragmentDirections.actionLoansFragmentToAddLoanFragment())
+                findNavController().navigate(ListLoansFragmentDirections.actionLoansFragmentToAddLoanFragment())
                 viewModel.onNavigatedToAddLoan()
             }
         })
 
         viewModel.navToEditLoan.observe(this, Observer { id ->
             id?.let {
-                //TODO: navigate to edit loan
-                Toast.makeText(activity, "EditLoan", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(ListLoansFragmentDirections.actionLoansFragmentToEditLoanFragment(id))
                 viewModel.onNavigatedToEditLoan()
             }
         })
