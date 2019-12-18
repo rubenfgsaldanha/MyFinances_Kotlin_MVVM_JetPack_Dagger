@@ -2,7 +2,7 @@ package com.example.myfinances2020.repository.network.categories
 
 import com.example.myfinances2020.repository.database.entities.Category
 
-class NetworkCategory(
+data class NetworkCategory(
     val _id: Long,
     val label: String,
     val color: Int

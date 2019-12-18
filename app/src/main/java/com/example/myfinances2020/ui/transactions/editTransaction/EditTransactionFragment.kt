@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -40,6 +41,17 @@ class EditTransactionFragment : Fragment(){
     }
 
     private fun setupObservers() {
+        viewModel.categoryLabels.observe(this, Observer { list ->
+            list?.let {
+                val categoryAdapter = ArrayAdapter(activity!!.applicationContext, android.R.layout.simple_spinner_item, list)
+                categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                binding.spinnerAddCategories.adapter = categoryAdapter
+
+                val index = viewModel.getSelectedIndex() ?: 0
+                binding.spinnerAddCategories.setSelection(index)
+            }
+        })
+
         viewModel.transaction.observe(this, Observer { transaction ->
             transaction?.let {
                 binding.expense.isChecked = transaction.isExpense
@@ -83,6 +95,7 @@ class EditTransactionFragment : Fragment(){
         val date = binding.btnDate.text.toString()
         val amount = binding.amount.text.toString().toDouble()
         val comment = binding.comment.text.toString()
-        viewModel.updateTransaction(date, amount, comment)
+        val category = binding.spinnerAddCategories.selectedItem.toString()
+        viewModel.updateTransaction(date, amount, category, comment)
     }
 }

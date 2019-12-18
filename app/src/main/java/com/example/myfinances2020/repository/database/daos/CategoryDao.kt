@@ -1,19 +1,16 @@
 package com.example.myfinances2020.repository.database.daos
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import com.example.myfinances2020.repository.database.entities.Category
 
 @Dao
 interface CategoryDao {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(category: Category)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(vararg categories: Category)
 
     @Update
@@ -26,10 +23,10 @@ interface CategoryDao {
     fun getCategoryById(id: Long) : Category
 
     @Query("select * from categories where label = :label")
-    fun getCategoryByLabel(label: String)
+    fun getCategoryByLabel(label: String) : Category
 
     @Query("select label from categories")
-    fun getAllLabels() : List<String>
+    fun getAllLabels() : LiveData<List<String>>
 
     @Query("delete from categories where label = :label")
     suspend fun deleteCategory(label: String)

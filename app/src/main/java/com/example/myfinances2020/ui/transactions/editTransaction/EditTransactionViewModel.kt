@@ -5,9 +5,10 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.myfinances2020.repository.TransactionsRepository
 import com.example.myfinances2020.repository.database.entities.Transaction
 import com.example.myfinances2020.repository.database.getDatabase
-import com.example.myfinances2020.repository.TransactionsRepository
+import com.example.myfinances2020.repository.network.categories.CategoryRepository
 import com.example.myfinances2020.utils.splitDate
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -21,6 +22,9 @@ class EditTransactionViewModel(private val transactionId: Long = 0L, application
 
     private val database = getDatabase(application)
     private val transactionsRepository = TransactionsRepository(database.transactionDao, null)
+    private val categoryRepository = CategoryRepository(database.categoryDao, null)
+
+    var categoryLabels = categoryRepository.categoryLabels
 
     private val _transaction = MediatorLiveData<Transaction>()
     val transaction: LiveData<Transaction> get() = _transaction
@@ -47,10 +51,10 @@ class EditTransactionViewModel(private val transactionId: Long = 0L, application
         _transaction.addSource(transactionsRepository.getTransactionById(transactionId), _transaction::setValue)
     }
 
-    fun updateTransaction(dateString: String, amount: Double, comment: String){
+    fun updateTransaction(dateString: String, amount: Double, category: String, comment: String){
         val date = splitDate(dateString)
         val t = Transaction(_transaction.value!!._id, date[0].toInt(), date[1].toInt(), date[2].toInt(),
-            "other", comment, amount, isExpense)
+            category, comment, amount, isExpense)
         uiScope.launch {
             transactionsRepository.updateTransaction(t)
         }
@@ -62,6 +66,18 @@ class EditTransactionViewModel(private val transactionId: Long = 0L, application
             transactionsRepository.deleteTransactionById(_transaction.value!!._id)
         }
         onReturnToTransactionsFragment()
+    }
+
+    fun getSelectedIndex() : Int?{
+        val labels = categoryLabels.value
+        labels?.let {
+            for(i in labels.indices){
+                if(labels[i] == transaction.value?.category){
+                    return i
+                }
+            }
+        }
+        return null
     }
 
     fun onPickDate(){
