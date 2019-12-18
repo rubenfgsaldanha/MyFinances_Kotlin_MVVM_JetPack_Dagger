@@ -80,4 +80,9 @@ class GraphsViewModel @Inject constructor(private val sharedPreferences: SharedP
     fun onPreviousMonthBtnClickFinished(){
         _previousMonthBtnClicked.value = false
     }
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
+    }
 }

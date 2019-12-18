@@ -15,6 +15,7 @@ import com.example.myfinances2020.databinding.FragmentListLoansBinding
 import com.example.myfinances2020.utils.ViewModelProviderFactory
 import com.example.myfinances2020.utils.formatDateWithoutDay
 import com.example.myfinances2020.utils.getCurrentDate
+import com.example.myfinances2020.utils.setCurrentDate
 import dagger.android.support.DaggerFragment
 import java.util.*
 import javax.inject.Inject
@@ -49,8 +50,7 @@ class ListLoansFragment : DaggerFragment(){
     private fun setupObservers(){
         viewModel.loans.observe(this, Observer { list ->
             list?.let {
-                val c = getCurrentDate()
-                binding.currentMonthLoans.text = formatDateWithoutDay(c.get(Calendar.MONTH), c.get(Calendar.YEAR))
+                binding.currentMonthLoans.text = setCurrentDate()
                 adapter.submitList(list)
             }
         })
