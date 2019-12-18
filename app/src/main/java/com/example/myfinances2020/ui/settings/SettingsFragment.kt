@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -34,6 +35,8 @@ class SettingsFragment : DaggerFragment(){
         viewModel = ViewModelProviders.of(this, providerFactory).get(SettingsViewModel::class.java)
         binding.viewModel = viewModel
 
+        populateCurrencies()
+
         setupObservers()
     }
 
@@ -47,5 +50,11 @@ class SettingsFragment : DaggerFragment(){
             binding.showSubtitles.isChecked = showSubtitles
             viewModel.onShowSubtitlesClickFinished()
         })
+    }
+
+    private fun populateCurrencies(){
+        val currencyAdapter = ArrayAdapter.createFromResource(activity!!.applicationContext, R.array.currency, android.R.layout.simple_spinner_item)
+        currencyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinnerCurrency.adapter = currencyAdapter
     }
 }
