@@ -6,6 +6,7 @@ import java.io.IOException
 import javax.inject.Inject
 
 class TransactionDataSource @Inject constructor(private val transactionService: TransactionService){
+
     suspend fun getTransactions() = safeNetworkCall(networkCall = { requestGetTransactions() }, errorMessage = "Error getting transactions")
 
     private suspend fun requestGetTransactions() : Result<List<NetworkTransaction>> {

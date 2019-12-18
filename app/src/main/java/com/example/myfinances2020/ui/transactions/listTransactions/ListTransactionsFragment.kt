@@ -70,14 +70,14 @@ class ListTransactionsFragment : DaggerFragment(){
 
         viewModel.navToAddTransaction.observe(this, Observer { navigate ->
             if(navigate){
-                this.findNavController().navigate(ListTransactionsFragmentDirections.actionTransactionsFragmentToAddTransactionFragment())
+                findNavController().navigate(ListTransactionsFragmentDirections.actionTransactionsFragmentToAddTransactionFragment())
                 viewModel.onNavigatedToAddTransaction()
             }
         })
 
         viewModel.navToEditTransaction.observe(this, Observer { navigate ->
             navigate?.let { id ->
-                this.findNavController().navigate(ListTransactionsFragmentDirections.actionTransactionsFragmentToEditTransactionFragment(id))
+                findNavController().navigate(ListTransactionsFragmentDirections.actionTransactionsFragmentToEditTransactionFragment(id))
                 viewModel.onNavigatedToEditTransaction()
             }
         })

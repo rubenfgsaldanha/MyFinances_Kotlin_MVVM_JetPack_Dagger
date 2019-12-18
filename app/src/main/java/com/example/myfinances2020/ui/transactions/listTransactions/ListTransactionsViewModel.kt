@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.myfinances2020.repository.TransactionsRepository
+import com.example.myfinances2020.repository.network.categories.CategoryRepository
 import com.example.myfinances2020.utils.formatDateWithoutDay
 import com.example.myfinances2020.utils.getCurrentDate
 import kotlinx.coroutines.CoroutineScope
@@ -13,7 +14,8 @@ import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
-class ListTransactionsViewModel @Inject constructor(private val transactionsRepository: TransactionsRepository) : ViewModel(){
+class ListTransactionsViewModel @Inject constructor(private val transactionsRepository: TransactionsRepository,
+                                                    private val categoryRepository: CategoryRepository) : ViewModel(){
 
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
@@ -41,6 +43,7 @@ class ListTransactionsViewModel @Inject constructor(private val transactionsRepo
         currentMonth = c.get(Calendar.MONTH)
         currentYear = c.get(Calendar.YEAR)
 
+        refreshCategories()
         refreshTransactions()
     }
 
@@ -48,6 +51,9 @@ class ListTransactionsViewModel @Inject constructor(private val transactionsRepo
         uiScope.launch { transactionsRepository.refreshTransactions() }
     }
 
+    private fun refreshCategories(){
+        uiScope.launch { categoryRepository.refreshCategories() }
+    }
 
     fun updatePreviousMonth(): String{
         if(currentMonth > 0){
