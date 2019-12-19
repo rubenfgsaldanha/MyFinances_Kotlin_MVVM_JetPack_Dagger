@@ -10,6 +10,8 @@ class CategoryRepository @Inject constructor(private val categoryDao: CategoryDa
     var categories = categoryDao.getAllCategories()
     var categoryLabels = categoryDao.getAllLabels()
 
+    suspend fun getCategoryByLabel(label: String) = categoryDao.getCategoryByLabel(label)
+
     suspend fun refreshCategories(){
         categoryDataSource?.let {
             val result =  categoryDataSource.getCategories()

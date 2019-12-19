@@ -12,6 +12,8 @@ import com.example.myfinances2020.databinding.FragmentGraphsBinding
 import com.example.myfinances2020.utils.ViewModelProviderFactory
 import com.example.myfinances2020.utils.setCurrentDate
 import dagger.android.support.DaggerFragment
+import lecho.lib.hellocharts.model.PieChartData
+import lecho.lib.hellocharts.model.SliceValue
 import javax.inject.Inject
 
 class GraphsFragment : DaggerFragment(){
@@ -40,6 +42,14 @@ class GraphsFragment : DaggerFragment(){
     }
 
     private fun setupObservers() {
+        viewModel.transactions.observe(this, Observer { list ->
+            list?.let { viewModel.pieChartLogic() }
+        })
+
+        viewModel.pieDataList.observe(this, Observer { pieData ->
+            fillPieChart(pieData)
+        })
+
         viewModel.previousMonthBtnClicked.observe(this, Observer { clicked ->
             if(clicked){
                 binding.currentMonthGraphs.text = viewModel.updatePreviousMonth()
@@ -53,5 +63,24 @@ class GraphsFragment : DaggerFragment(){
                 viewModel.onNextMonthBtnClickFinished()
             }
         })
+    }
+
+    private fun fillPieChart(data: List<SliceValue>?){
+        val pieChartData: PieChartData
+
+        if(data.isNullOrEmpty()){
+            pieChartData = PieChartData()
+            binding.noRecordsGraphs.text = getString(R.string.no_data_found)
+            binding.overallGraphs.text = ""
+        }
+        else{
+            pieChartData = PieChartData(data)
+            binding.noRecordsGraphs.visibility = View.GONE
+            binding.overallGraphs.text = viewModel.valueTotalAmount
+        }
+
+        binding.pieChart.pieChartData = pieChartData
+        pieChartData.setHasLabels(true).valueLabelTextSize = 14
+        pieChartData.setHasCenterCircle(true).centerCircleScale = 0.42f
     }
 }

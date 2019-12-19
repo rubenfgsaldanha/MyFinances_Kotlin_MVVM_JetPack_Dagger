@@ -57,8 +57,14 @@ class AddTransactionViewModel @Inject constructor(private val transactionsReposi
     fun insertTransaction(dateString: String, category: String, comment: String, amount: Double){
         val date = splitDate(dateString)
 
+        val newAmount: Double = if(isExpense){
+            0 - amount
+        } else{
+            amount
+        }
+
         val t = Transaction(0, date[0].toInt(), date[1].toInt(), date[2].toInt(),
-            category, comment, amount, isExpense)
+            category, comment, newAmount, isExpense)
 
         uiScope.launch {
             transactionsRepository.insertTransaction(t)

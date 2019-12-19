@@ -23,7 +23,7 @@ class TransactionsRepository @Inject constructor(private val transactionDao: Tra
 
     fun getTransactionById(id: Long) = transactionDao.getTransactionById(id)
 
-    fun getCurrentMonthTransactions(month: Int, year: Int){ transactions = transactionDao.getTransactionsByMonth(month, year) }
+    fun getCurrentMonthTransactions(month: Int, year: Int){ transactions = transactionDao.getTransactionsByMonth(month+1, year) }
 
     suspend fun refreshTransactions(){
         transactionDataSource?.let {

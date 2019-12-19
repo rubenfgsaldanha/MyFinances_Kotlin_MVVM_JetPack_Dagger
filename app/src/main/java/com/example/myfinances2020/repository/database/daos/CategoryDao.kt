@@ -23,7 +23,7 @@ interface CategoryDao {
     fun getCategoryById(id: Long) : Category
 
     @Query("select * from categories where label = :label")
-    fun getCategoryByLabel(label: String) : Category
+    suspend fun getCategoryByLabel(label: String) : Category
 
     @Query("select label from categories")
     fun getAllLabels() : LiveData<List<String>>
