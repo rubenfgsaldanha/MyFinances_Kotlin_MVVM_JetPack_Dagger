@@ -13,8 +13,10 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class AddTransactionViewModel @Inject constructor(private val transactionsRepository: TransactionsRepository,
-                                                  categoryRepository: CategoryRepository) : ViewModel(){
+class AddTransactionViewModel @Inject constructor(
+    private val transactionsRepository: TransactionsRepository,
+    categoryRepository: CategoryRepository
+) : ViewModel() {
 
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
@@ -29,12 +31,11 @@ class AddTransactionViewModel @Inject constructor(private val transactionsReposi
 
     private var isExpense = true
 
-
-    fun onPickDate(){
+    fun onPickDate() {
         _pickDate.value = true
     }
 
-    fun onDatePicked(){
+    fun onDatePicked() {
         _pickDate.value = false
     }
 
@@ -46,20 +47,20 @@ class AddTransactionViewModel @Inject constructor(private val transactionsReposi
         _navToTransactionsFragment.value = false
     }
 
-    fun onExpenseClicked(){
+    fun onExpenseClicked() {
         isExpense = true
     }
 
-    fun onIncomeClicked(){
+    fun onIncomeClicked() {
         isExpense = false
     }
 
-    fun insertTransaction(dateString: String, category: String, comment: String, amount: Double){
+    fun insertTransaction(dateString: String, category: String, comment: String, amount: Double) {
         val date = splitDate(dateString)
 
-        val newAmount: Double = if(isExpense){
+        val newAmount: Double = if (isExpense) {
             0 - amount
-        } else{
+        } else {
             amount
         }
 

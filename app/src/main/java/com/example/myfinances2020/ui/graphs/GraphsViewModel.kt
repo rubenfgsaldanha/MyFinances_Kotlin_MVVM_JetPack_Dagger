@@ -46,7 +46,6 @@ class GraphsViewModel @Inject constructor(
     private val _pieDataList = MutableLiveData<List<SliceValue>?>()
     val pieDataList: LiveData<List<SliceValue>?> get() = _pieDataList
 
-
     init {
         val c = getCurrentDate()
         currentMonth = c.get(Calendar.MONTH)
@@ -86,8 +85,7 @@ class GraphsViewModel @Inject constructor(
     fun pieChartLogic() {
         if (transactions.value.isNullOrEmpty()) {
             _pieDataList.value = null
-        }
-        else {
+        } else {
             var totalAmount = 0.0
             var totalMoney = 0.0
 
@@ -96,7 +94,7 @@ class GraphsViewModel @Inject constructor(
             for (transaction in transactions.value!!) {
                 totalAmount += transaction.amount
                 totalMoney += abs(transaction.amount)
-                //if there's already a transaction of a certain category,
+                // if there's already a transaction of a certain category,
                 // we calculate the sum of the values of those transactions
                 // and update the value in the hashmap
                 if (hashMap.containsKey(transaction.category)) {
@@ -108,14 +106,14 @@ class GraphsViewModel @Inject constructor(
                 }
             }
 
-            //now we create a list with the transaction to present the pie chart
+            // now we create a list with the transaction to present the pie chart
             val pieData: MutableList<SliceValue> = ArrayList()
             uiScope.launch {
                 for ((key, value1) in hashMap) {
                     val value = value1.roundToInt()
                     val color = categoryRepository.getCategoryByLabel(key).color
 
-                    //calculate percentage and create subtitle if the user wishes
+                    // calculate percentage and create subtitle if the user wishes
                     var label = ""
                     val showPercentage = sharedPreferences.getBoolean(SHOW_PERCENTAGES, false)
                     if (showPercentage) {
@@ -123,7 +121,7 @@ class GraphsViewModel @Inject constructor(
                         val percentageString = df2.format(percentage)
                         label = "$percentageString%"
                     }
-                    //here we add a value, color and a label
+                    // here we add a value, color and a label
                     pieData.add(SliceValue(value.toFloat(), color).setLabel(label))
                 }
 

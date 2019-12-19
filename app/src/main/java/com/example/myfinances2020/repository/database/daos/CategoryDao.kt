@@ -17,16 +17,16 @@ interface CategoryDao {
     suspend fun update(category: Category)
 
     @Query("select * from categories")
-    fun getAllCategories() : LiveData<List<Category>>
+    fun getAllCategories(): LiveData<List<Category>>
 
     @Query("select * from categories where _id = :id")
-    fun getCategoryById(id: Long) : Category
+    fun getCategoryById(id: Long): Category
 
     @Query("select * from categories where label = :label")
-    suspend fun getCategoryByLabel(label: String) : Category
+    suspend fun getCategoryByLabel(label: String): Category
 
     @Query("select label from categories")
-    fun getAllLabels() : LiveData<List<String>>
+    fun getAllLabels(): LiveData<List<String>>
 
     @Query("delete from categories where label = :label")
     suspend fun deleteCategory(label: String)

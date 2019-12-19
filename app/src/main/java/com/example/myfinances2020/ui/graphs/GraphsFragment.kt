@@ -16,7 +16,7 @@ import lecho.lib.hellocharts.model.PieChartData
 import lecho.lib.hellocharts.model.SliceValue
 import javax.inject.Inject
 
-class GraphsFragment : DaggerFragment(){
+class GraphsFragment : DaggerFragment() {
 
     private lateinit var viewModel: GraphsViewModel
     private lateinit var binding: FragmentGraphsBinding
@@ -51,29 +51,28 @@ class GraphsFragment : DaggerFragment(){
         })
 
         viewModel.previousMonthBtnClicked.observe(this, Observer { clicked ->
-            if(clicked){
+            if (clicked) {
                 binding.currentMonthGraphs.text = viewModel.updatePreviousMonth()
                 viewModel.onPreviousMonthBtnClickFinished()
             }
         })
 
         viewModel.nextMonthBtnClicked.observe(this, Observer { clicked ->
-            if(clicked){
+            if (clicked) {
                 binding.currentMonthGraphs.text = viewModel.updateNextMonth()
                 viewModel.onNextMonthBtnClickFinished()
             }
         })
     }
 
-    private fun fillPieChart(data: List<SliceValue>?){
+    private fun fillPieChart(data: List<SliceValue>?) {
         val pieChartData: PieChartData
 
-        if(data.isNullOrEmpty()){
+        if (data.isNullOrEmpty()) {
             pieChartData = PieChartData()
             binding.noRecordsGraphs.text = getString(R.string.no_data_found)
             binding.overallGraphs.text = ""
-        }
-        else{
+        } else {
             pieChartData = PieChartData(data)
             binding.noRecordsGraphs.visibility = View.GONE
             binding.overallGraphs.text = viewModel.valueTotalAmount

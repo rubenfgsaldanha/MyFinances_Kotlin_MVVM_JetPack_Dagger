@@ -12,7 +12,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class AddLoanViewModel @Inject constructor(private val loansRepository: LoansRepository) : ViewModel(){
+class AddLoanViewModel @Inject constructor(private val loansRepository: LoansRepository) : ViewModel() {
 
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
@@ -25,12 +25,11 @@ class AddLoanViewModel @Inject constructor(private val loansRepository: LoansRep
 
     private var isLender = true
 
-
-    fun onPickDate(){
+    fun onPickDate() {
         _pickDate.value = true
     }
 
-    fun onDatePicked(){
+    fun onDatePicked() {
         _pickDate.value = false
     }
 
@@ -42,15 +41,15 @@ class AddLoanViewModel @Inject constructor(private val loansRepository: LoansRep
         _navToLoansFragment.value = false
     }
 
-    fun onIsLenderClicked(){
+    fun onIsLenderClicked() {
         isLender = true
     }
 
-    fun onIsLendeeClicked(){
+    fun onIsLendeeClicked() {
         isLender = false
     }
 
-    fun insertLoan(dateString: String, amount: Double, thirdParty: String){
+    fun insertLoan(dateString: String, amount: Double, thirdParty: String) {
         val date = splitDate(dateString)
 
         val l = Loan(0, date[0].toInt(), date[1].toInt(), date[2].toInt(),

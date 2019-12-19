@@ -23,5 +23,5 @@ abstract class ActivityBuildersModule {
         TransactionsModule::class, LoansFragmentsBuildersModule::class, LoansViewModelsModule::class, LoansModule::class,
         SettingsFragmentBuilderModule::class, SettingsViewModelModule::class, GraphsFragmentBuilderModule::class,
         GraphsViewModelModule::class])
-    abstract fun contributeMainActivity() : MainActivity
+    abstract fun contributeMainActivity(): MainActivity
 }

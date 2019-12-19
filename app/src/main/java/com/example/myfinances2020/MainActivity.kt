@@ -3,7 +3,6 @@ package com.example.myfinances2020
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -26,10 +25,10 @@ class MainActivity : DaggerAppCompatActivity() {
 
     private fun setupNavigation() {
         bottomNavController = Navigation.findNavController(this, R.id.navHostFragmentBottom)
-        //val overflowNavController = Navigation.findNavController(this, R.id.navHostFragmentTop)
+        // val overflowNavController = Navigation.findNavController(this, R.id.navHostFragmentTop)
 
         binding.bottomNavigation.setupWithNavController(bottomNavController)
-        //setupActionBarWithNavController(overflowNavController)
+        // setupActionBarWithNavController(overflowNavController)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

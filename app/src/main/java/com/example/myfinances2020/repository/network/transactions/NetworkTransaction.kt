@@ -27,4 +27,3 @@ fun List<NetworkTransaction>.asDatabaseModel() =
             isExpense = transaction.isExpense
         )
     }.toTypedArray()
-

@@ -5,16 +5,16 @@ import com.example.myfinances2020.utils.safeNetworkCall
 import java.io.IOException
 import javax.inject.Inject
 
-class CategoryDataSource @Inject constructor(private val categoryService: CategoryService){
+class CategoryDataSource @Inject constructor(private val categoryService: CategoryService) {
 
     suspend fun getCategories() = safeNetworkCall(networkCall = { requestGetCategories() }, errorMessage = "Error getting categories")
 
-    private suspend fun requestGetCategories() : Result<List<NetworkCategory>>{
+    private suspend fun requestGetCategories(): Result<List<NetworkCategory>> {
         val response = categoryService.getAllCategories()
 
-        if(response.isSuccessful){
+        if (response.isSuccessful) {
             val body = response.body()
-            if(body != null){
+            if (body != null) {
                 return Result.Success(body)
             }
         }

@@ -12,7 +12,7 @@ import com.example.myfinances2020.repository.database.entities.Loan
 import com.example.myfinances2020.repository.database.entities.Transaction
 
 @Database(entities = [Transaction::class, Loan::class, Category::class], version = 1)
-abstract class MyFinancesDatabase : RoomDatabase(){
+abstract class MyFinancesDatabase : RoomDatabase() {
     abstract val transactionDao: TransactionDao
     abstract val loanDao: LoanDao
     abstract val categoryDao: CategoryDao
@@ -20,9 +20,9 @@ abstract class MyFinancesDatabase : RoomDatabase(){
 
 private lateinit var INSTANCE: MyFinancesDatabase
 
-fun getDatabase(context: Context): MyFinancesDatabase{
-    synchronized(MyFinancesDatabase::class.java){
-        if(!::INSTANCE.isInitialized){
+fun getDatabase(context: Context): MyFinancesDatabase {
+    synchronized(MyFinancesDatabase::class.java) {
+        if (!::INSTANCE.isInitialized) {
             INSTANCE = Room.databaseBuilder(context.applicationContext, MyFinancesDatabase::class.java, "MyFinances2020").build()
         }
     }

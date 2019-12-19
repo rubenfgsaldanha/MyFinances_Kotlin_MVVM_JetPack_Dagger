@@ -15,17 +15,17 @@ class TransactionsModule {
 
     @MainScope
     @Provides
-    fun provideTransactionService(retrofit: Retrofit) : TransactionService = retrofit.create(TransactionService::class.java)
+    fun provideTransactionService(retrofit: Retrofit): TransactionService = retrofit.create(TransactionService::class.java)
 
     @MainScope
     @Provides
-    fun provideTransactionDao(database: MyFinancesDatabase) : TransactionDao = database.transactionDao
+    fun provideTransactionDao(database: MyFinancesDatabase): TransactionDao = database.transactionDao
 
     @MainScope
     @Provides
-    fun provideCategoryService(retrofit: Retrofit) : CategoryService = retrofit.create(CategoryService::class.java)
+    fun provideCategoryService(retrofit: Retrofit): CategoryService = retrofit.create(CategoryService::class.java)
 
     @MainScope
     @Provides
-    fun provideCategoryDao(database: MyFinancesDatabase) : CategoryDao = database.categoryDao
+    fun provideCategoryDao(database: MyFinancesDatabase): CategoryDao = database.categoryDao
 }

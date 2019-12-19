@@ -5,5 +5,5 @@ import retrofit2.http.GET
 
 interface LoanService {
     @GET("api/loans/all")
-    suspend fun getAllLoans() : Response<List<NetworkLoan>>
+    suspend fun getAllLoans(): Response<List<NetworkLoan>>
 }

@@ -8,5 +8,5 @@ import dagger.android.ContributesAndroidInjector
 abstract class GraphsFragmentBuilderModule {
 
     @ContributesAndroidInjector
-    abstract fun contributeGraphsFragment() : GraphsFragment
+    abstract fun contributeGraphsFragment(): GraphsFragment
 }

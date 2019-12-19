@@ -13,5 +13,5 @@ abstract class GraphsViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(GraphsViewModel::class)
-    abstract fun bindGraphsViewModule(viewModel: GraphsViewModel) : ViewModel
+    abstract fun bindGraphsViewModule(viewModel: GraphsViewModel): ViewModel
 }

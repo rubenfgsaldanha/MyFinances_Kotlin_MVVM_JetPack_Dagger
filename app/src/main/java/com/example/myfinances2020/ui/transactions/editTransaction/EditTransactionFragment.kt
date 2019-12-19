@@ -17,17 +17,17 @@ import com.example.myfinances2020.utils.formatBtnDate
 import com.example.myfinances2020.utils.getCurrentDate
 import java.util.*
 
-class EditTransactionFragment : Fragment(){
+class EditTransactionFragment : Fragment() {
 
     private lateinit var viewModel: EditTransactionViewModel
     private lateinit var binding: FragmentEditTransactionBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?{
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentEditTransactionBinding.inflate(inflater)
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.edit_transaction)
 
         val application = requireNotNull(this.activity).application
-        val arguments =  EditTransactionFragmentArgs.fromBundle(arguments!!)
+        val arguments = EditTransactionFragmentArgs.fromBundle(arguments!!)
         val viewModelFactory = EditTransactionViewModelFactory(arguments.transactionId, application)
 
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(EditTransactionViewModel::class.java)
@@ -60,38 +60,38 @@ class EditTransactionFragment : Fragment(){
         })
 
         viewModel.pickDate.observe(this, Observer { pickDate ->
-            if(pickDate){
+            if (pickDate) {
                 pickDate()
                 viewModel.onDatePicked()
             }
         })
 
         viewModel.update.observe(this, Observer { update ->
-            if(update){
+            if (update) {
                 updateTransactionValues()
                 viewModel.onUpdated()
             }
         })
 
         viewModel.navToTransactionsFragment.observe(this, Observer { navigate ->
-            if(navigate){
+            if (navigate) {
                 findNavController().navigate(EditTransactionFragmentDirections.actionEditTransactionFragmentToTransactionsFragment())
                 viewModel.onReturnedToTransactionsFragment()
             }
         })
     }
 
-    private fun pickDate(){
+    private fun pickDate() {
         val c = getCurrentDate()
 
-        val datePicker = DatePickerDialog(context!!, DatePickerDialog.OnDateSetListener{ _, chosenYear, chosenMonth, chosenDay ->
+        val datePicker = DatePickerDialog(context!!, DatePickerDialog.OnDateSetListener { _, chosenYear, chosenMonth, chosenDay ->
             binding.btnDate.text = formatBtnDate(chosenDay, chosenMonth, chosenYear)
         }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH))
 
         datePicker.show()
     }
 
-    private fun updateTransactionValues(){
+    private fun updateTransactionValues() {
         val date = binding.btnDate.text.toString()
         val amount = binding.amount.text.toString().toDouble()
         val comment = binding.comment.text.toString()

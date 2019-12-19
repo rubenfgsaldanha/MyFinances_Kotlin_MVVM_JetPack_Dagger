@@ -18,15 +18,15 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideGson() : Gson = Gson()
+    fun provideGson(): Gson = Gson()
 
     @Singleton
     @Provides
-    fun provideGsonConverterFactory(gson: Gson) : GsonConverterFactory = GsonConverterFactory.create(gson)
+    fun provideGsonConverterFactory(gson: Gson): GsonConverterFactory = GsonConverterFactory.create(gson)
 
     @Singleton
     @Provides
-    fun provideRetrofitInstance(converterFactory: GsonConverterFactory) : Retrofit{
+    fun provideRetrofitInstance(converterFactory: GsonConverterFactory): Retrofit {
         return Retrofit.Builder()
             .baseUrl(ENDPOINT)
             .addConverterFactory(converterFactory)
@@ -39,5 +39,5 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideSharedPreferences(application: Application) : SharedPreferences = application.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE)
+    fun provideSharedPreferences(application: Application): SharedPreferences = application.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE)
 }

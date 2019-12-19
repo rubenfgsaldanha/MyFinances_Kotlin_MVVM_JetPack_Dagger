@@ -9,10 +9,10 @@ import com.example.myfinances2020.utils.getCurrentDate
 import java.util.*
 import javax.inject.Inject
 
-class LoansRepository @Inject constructor(private val loanDao: LoanDao, private val loanDataSource: LoanDataSource?){
+class LoansRepository @Inject constructor(private val loanDao: LoanDao, private val loanDataSource: LoanDataSource?) {
 
     private val date = getCurrentDate()
-    var loans = loanDao.getLoansByMonth(date.get(Calendar.MONTH)+1, date.get(Calendar.YEAR))
+    var loans = loanDao.getLoansByMonth(date.get(Calendar.MONTH) + 1, date.get(Calendar.YEAR))
 
     suspend fun insertLoan(l: Loan) = loanDao.insert(l)
 
@@ -24,10 +24,10 @@ class LoansRepository @Inject constructor(private val loanDao: LoanDao, private 
 
     fun getCurrentMonthLoans(month: Int, year: Int) = loanDao.getLoansByMonth(month, year)
 
-    suspend fun refreshLoans(){
+    suspend fun refreshLoans() {
         loanDataSource?.let {
             val result = loanDataSource.getLoans()
-            if(result is Result.Success){
+            if (result is Result.Success) {
                 val networkLoanList = result.data
                 loanDao.insertAll(*networkLoanList.asDatabaseModel())
             }

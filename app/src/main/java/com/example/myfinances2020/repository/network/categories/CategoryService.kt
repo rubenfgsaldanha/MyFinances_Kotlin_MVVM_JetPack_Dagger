@@ -5,5 +5,5 @@ import retrofit2.http.GET
 
 interface CategoryService {
     @GET("api/categories/all")
-    suspend fun getAllCategories() : Response<List<NetworkCategory>>
+    suspend fun getAllCategories(): Response<List<NetworkCategory>>
 }

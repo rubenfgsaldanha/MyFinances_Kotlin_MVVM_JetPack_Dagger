@@ -11,9 +11,9 @@ import com.example.myfinances2020.repository.database.entities.formatDate
 fun TextView.setDate(item: Transaction?) = item?.let { text = item.formatDate() }
 
 @BindingAdapter("transactionImage")
-fun ImageView.setTransactionImage(item: Transaction?){
+fun ImageView.setTransactionImage(item: Transaction?) {
     item?.let {
-        setColorFilter(when(item.isExpense){
+        setColorFilter(when (item.isExpense) {
             true -> Color.RED
             false -> Color.GREEN
         })
@@ -21,7 +21,7 @@ fun ImageView.setTransactionImage(item: Transaction?){
 }
 
 @BindingAdapter("transactionCategoryComment")
-fun TextView.setCategoryOrComment(item: Transaction?){
+fun TextView.setCategoryOrComment(item: Transaction?) {
     item?.let {
         text = if (item.comment != null && item.comment.isNotEmpty()) item.comment else item.category
     }

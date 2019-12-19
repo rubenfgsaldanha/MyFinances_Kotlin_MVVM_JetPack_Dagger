@@ -17,9 +17,9 @@ fun TextView.setLoanAmount(item: Loan?) = item?.let { text = item.amount.toStrin
 fun TextView.setLoanDate(item: Loan?) = item?.let { text = item.formatDate() }
 
 @BindingAdapter("loanImage")
-fun ImageView.setLoanImage(item: Loan?){
+fun ImageView.setLoanImage(item: Loan?) {
     item?.let {
-        setColorFilter(when(item.isLender){
+        setColorFilter(when (item.isLender) {
             true -> Color.RED
             false -> Color.GREEN
         })

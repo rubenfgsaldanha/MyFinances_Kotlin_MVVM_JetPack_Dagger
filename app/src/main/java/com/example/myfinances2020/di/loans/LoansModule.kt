@@ -13,9 +13,9 @@ class LoansModule {
 
     @MainScope
     @Provides
-    fun provideLoanService(retrofit: Retrofit) : LoanService = retrofit.create(LoanService::class.java)
+    fun provideLoanService(retrofit: Retrofit): LoanService = retrofit.create(LoanService::class.java)
 
     @MainScope
     @Provides
-    fun provideLoanDao(database: MyFinancesDatabase) : LoanDao = database.loanDao
+    fun provideLoanDao(database: MyFinancesDatabase): LoanDao = database.loanDao
 }

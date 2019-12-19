@@ -10,11 +10,11 @@ import dagger.android.ContributesAndroidInjector
 abstract class TransactionsFragmentsBuildersModule {
 
     @ContributesAndroidInjector
-    abstract fun contributeListTransactionsFragment() : ListTransactionsFragment
+    abstract fun contributeListTransactionsFragment(): ListTransactionsFragment
 
     @ContributesAndroidInjector
-    abstract fun contributeAddTransactionFragment() : AddTransactionFragment
+    abstract fun contributeAddTransactionFragment(): AddTransactionFragment
 
     @ContributesAndroidInjector
-    abstract fun contributeEditTransactionFragment() : EditTransactionFragment
+    abstract fun contributeEditTransactionFragment(): EditTransactionFragment
 }

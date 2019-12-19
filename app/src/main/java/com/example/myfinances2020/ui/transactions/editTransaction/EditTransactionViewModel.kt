@@ -15,7 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class EditTransactionViewModel(private val transactionId: Long = 0L, application: Application) : AndroidViewModel(application){
+class EditTransactionViewModel(private val transactionId: Long = 0L, application: Application) : AndroidViewModel(application) {
 
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
@@ -40,7 +40,6 @@ class EditTransactionViewModel(private val transactionId: Long = 0L, application
 
     private var isExpense = true
 
-
     init {
         getTransactionFromDb()
     }
@@ -51,7 +50,7 @@ class EditTransactionViewModel(private val transactionId: Long = 0L, application
         _transaction.addSource(transactionsRepository.getTransactionById(transactionId), _transaction::setValue)
     }
 
-    fun updateTransaction(dateString: String, amount: Double, category: String, comment: String){
+    fun updateTransaction(dateString: String, amount: Double, category: String, comment: String) {
         val date = splitDate(dateString)
         val t = Transaction(_transaction.value!!._id, date[0].toInt(), date[1].toInt(), date[2].toInt(),
             category, comment, amount, isExpense)
@@ -61,18 +60,18 @@ class EditTransactionViewModel(private val transactionId: Long = 0L, application
         onReturnToTransactionsFragment()
     }
 
-    fun deleteTransaction(){
+    fun deleteTransaction() {
         uiScope.launch {
             transactionsRepository.deleteTransactionById(_transaction.value!!._id)
         }
         onReturnToTransactionsFragment()
     }
 
-    fun getSelectedIndex() : Int?{
+    fun getSelectedIndex(): Int? {
         val labels = categoryLabels.value
         labels?.let {
-            for(i in labels.indices){
-                if(labels[i] == transaction.value?.category){
+            for (i in labels.indices) {
+                if (labels[i] == transaction.value?.category) {
                     return i
                 }
             }
@@ -80,27 +79,27 @@ class EditTransactionViewModel(private val transactionId: Long = 0L, application
         return null
     }
 
-    fun onPickDate(){
+    fun onPickDate() {
         _pickDate.value = true
     }
 
-    fun onDatePicked(){
+    fun onDatePicked() {
         _pickDate.value = false
     }
 
-    fun onExpenseClicked(){
+    fun onExpenseClicked() {
         isExpense = true
     }
 
-    fun onIncomeClicked(){
+    fun onIncomeClicked() {
         isExpense = false
     }
 
-    fun onUpdate(){
+    fun onUpdate() {
         _update.value = true
     }
 
-    fun onUpdated(){
+    fun onUpdated() {
         _update.value = false
     }
 

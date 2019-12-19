@@ -9,7 +9,7 @@ import com.example.myfinances2020.repository.database.entities.Transaction
 import com.example.myfinances2020.databinding.ListItemTransactionBinding
 
 class TransactionsAdapter(private val clickListener: TransactionListener) : ListAdapter<Transaction,
-        TransactionsAdapter.ViewHolder>(TransactionDiffCallback()){
+        TransactionsAdapter.ViewHolder>(TransactionDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
@@ -21,14 +21,14 @@ class TransactionsAdapter(private val clickListener: TransactionListener) : List
         holder.bind(clickListener, item)
     }
 
-    class ViewHolder private constructor(private val binding: ListItemTransactionBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(clickListener: TransactionListener, item: Transaction){
+    class ViewHolder private constructor(private val binding: ListItemTransactionBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(clickListener: TransactionListener, item: Transaction) {
             binding.transaction = item
             binding.clickListener = clickListener
             binding.executePendingBindings()
         }
 
-        companion object{
+        companion object {
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ListItemTransactionBinding.inflate(layoutInflater, parent, false)
@@ -39,12 +39,12 @@ class TransactionsAdapter(private val clickListener: TransactionListener) : List
     }
 }
 
-class TransactionDiffCallback : DiffUtil.ItemCallback<Transaction>(){
+class TransactionDiffCallback : DiffUtil.ItemCallback<Transaction>() {
     override fun areItemsTheSame(oldItem: Transaction, newItem: Transaction) = oldItem._id == newItem._id
 
     override fun areContentsTheSame(oldItem: Transaction, newItem: Transaction) = oldItem == newItem
 }
 
-class TransactionListener(val clickListener: (transactionId: Long) -> Unit){
+class TransactionListener(val clickListener: (transactionId: Long) -> Unit) {
     fun onClick(transaction: Transaction) = clickListener(transaction._id)
 }

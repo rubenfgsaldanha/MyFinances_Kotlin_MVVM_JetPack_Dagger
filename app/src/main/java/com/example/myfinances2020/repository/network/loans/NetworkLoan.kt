@@ -3,7 +3,7 @@ package com.example.myfinances2020.repository.network.loans
 import com.example.myfinances2020.repository.database.entities.Loan
 import com.google.gson.annotations.SerializedName
 
-class NetworkLoan (
+class NetworkLoan(
     val _id: Long,
     val day: Int,
     val month: Int,

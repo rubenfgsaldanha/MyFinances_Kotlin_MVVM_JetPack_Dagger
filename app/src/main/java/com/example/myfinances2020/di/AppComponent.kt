@@ -11,14 +11,14 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [AndroidSupportInjectionModule::class, ActivityBuildersModule::class, AppModule::class,
     ViewModelFactoryModule::class])
-interface AppComponent : AndroidInjector<MyFinancesApplication>{
+interface AppComponent : AndroidInjector<MyFinancesApplication> {
 
     @Component.Builder
-    interface Builder{
+    interface Builder {
 
         @BindsInstance
-        fun application(application: Application) : Builder
+        fun application(application: Application): Builder
 
-        fun build() : AppComponent
+        fun build(): AppComponent
     }
 }

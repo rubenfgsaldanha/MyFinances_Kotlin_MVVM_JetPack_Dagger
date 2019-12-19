@@ -9,17 +9,17 @@ import dagger.Module
 import dagger.multibindings.IntoMap
 
 @Module
-abstract class TransactionsViewModelsModule{
+abstract class TransactionsViewModelsModule {
 
     @Binds
     @IntoMap
     @ViewModelKey(ListTransactionsViewModel::class)
-    abstract fun bindListTransactionsViewModel(viewModel: ListTransactionsViewModel) : ViewModel
+    abstract fun bindListTransactionsViewModel(viewModel: ListTransactionsViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(AddTransactionViewModel::class)
-    abstract fun bindAddTransactionViewModel(viewModel: AddTransactionViewModel) : ViewModel
+    abstract fun bindAddTransactionViewModel(viewModel: AddTransactionViewModel): ViewModel
 
     /*@Binds
     @IntoMap
