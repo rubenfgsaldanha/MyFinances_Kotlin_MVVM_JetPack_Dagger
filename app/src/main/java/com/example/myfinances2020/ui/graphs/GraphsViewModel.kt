@@ -17,6 +17,7 @@ import lecho.lib.hellocharts.model.SliceValue
 import java.text.DecimalFormat
 import java.util.*
 import javax.inject.Inject
+import kotlin.collections.HashMap
 import kotlin.math.abs
 import kotlin.math.roundToInt
 
@@ -88,7 +89,6 @@ class GraphsViewModel @Inject constructor(
         } else {
             var totalAmount = 0.0
             var totalMoney = 0.0
-
             val hashMap = HashMap<String, Double>()
 
             for (transaction in transactions.value!!) {
@@ -113,7 +113,6 @@ class GraphsViewModel @Inject constructor(
                     val value = value1.roundToInt()
                     val color = categoryRepository.getCategoryByLabel(key).color
 
-                    // calculate percentage and create subtitle if the user wishes
                     var label = ""
                     val showPercentage = sharedPreferences.getBoolean(SHOW_PERCENTAGES, false)
                     if (showPercentage) {
