@@ -20,21 +20,10 @@ class KoinApplication : Application(){
     }
 
     private fun getAllModules() = listOf(
-        listTransactionsViewModelModule,
-        addTransactionsViewModelModule,
-        listLoansViewModelModule,
-        addLoansViewModelModule,
-        graphsViewModelModule,
-        settingsViewModelModule,
+        viewModelsModule,
         transactionsModule,
-        transactionRepositoryModule,
-        transactionDataSourceModule,
         loansModule,
-        loanRepositoryModule,
-        loanDataSourceModule,
         categoriesModule,
-        categoryRepositoryModule,
-        categoryDataSourceModule,
         retrofitModule,
         databaseModule,
         sharedPreferencesModule
