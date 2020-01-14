@@ -14,13 +14,13 @@ import org.junit.runner.RunWith
 import java.io.IOException
 
 @RunWith(AndroidJUnit4::class)
-class DatabaseTest{
+class DatabaseTest {
 
     private lateinit var transactionDao: TransactionDao
     private lateinit var database: MyFinancesDatabase
 
     @Before
-    fun createDb(){
+    fun createDb() {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
 
         database = Room.inMemoryDatabaseBuilder(context, MyFinancesDatabase::class.java).allowMainThreadQueries().build()

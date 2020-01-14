@@ -8,7 +8,7 @@ import com.example.myfinances2020.utils.SHOW_PERCENTAGES
 import com.example.myfinances2020.utils.SHOW_SUBTITLES
 import javax.inject.Inject
 
-class SettingsViewModel @Inject constructor(private val sharedPreferences: SharedPreferences) : ViewModel(){
+class SettingsViewModel @Inject constructor(private val sharedPreferences: SharedPreferences) : ViewModel() {
 
     private val _showPercentage = MutableLiveData<Boolean>()
     val showPercentage: LiveData<Boolean> get() = _showPercentage
@@ -21,19 +21,19 @@ class SettingsViewModel @Inject constructor(private val sharedPreferences: Share
         _showSubtitles.value = sharedPreferences.getBoolean(SHOW_SUBTITLES, false)
     }
 
-    fun onShowPercentageClicked(){
+    fun onShowPercentageClicked() {
         _showPercentage.value = !_showPercentage.value!!
     }
 
-    fun onShowSubtitlesClicked(){
+    fun onShowSubtitlesClicked() {
         _showSubtitles.value = !_showSubtitles.value!!
     }
 
-    fun onShowPercentagesClickFinished(){
+    fun onShowPercentagesClickFinished() {
         sharedPreferences.edit().putBoolean(SHOW_PERCENTAGES, _showPercentage.value!!).apply()
     }
 
-    fun onShowSubtitlesClickFinished(){
+    fun onShowSubtitlesClickFinished() {
         sharedPreferences.edit().putBoolean(SHOW_SUBTITLES, _showSubtitles.value!!).apply()
     }
 }

@@ -13,5 +13,5 @@ abstract class SettingsViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(SettingsViewModel::class)
-    abstract fun bindSettingsViewModule(viewModel: SettingsViewModel) : ViewModel
+    abstract fun bindSettingsViewModule(viewModel: SettingsViewModel): ViewModel
 }

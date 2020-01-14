@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -18,7 +19,7 @@ import dagger.android.support.DaggerFragment
 import java.util.*
 import javax.inject.Inject
 
-class AddTransactionFragment : DaggerFragment(){
+class AddTransactionFragment : DaggerFragment() {
 
     private lateinit var viewModel: AddTransactionViewModel
     private lateinit var binding: FragmentAddTransactionBinding
@@ -42,21 +43,29 @@ class AddTransactionFragment : DaggerFragment(){
         setupObservers()
     }
 
-    private fun setDate(){
+    private fun setDate() {
         val c = getCurrentDate()
         binding.btnDate.text = formatBtnDate(c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.MONTH), c.get(Calendar.YEAR))
     }
 
     private fun setupObservers() {
+        viewModel.categoryLabels.observe(this, Observer { list ->
+            list?.let {
+                val categoryAdapter = ArrayAdapter(activity!!.applicationContext, android.R.layout.simple_spinner_item, list)
+                categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                binding.spinnerAddCategories.adapter = categoryAdapter
+            }
+        })
+
         viewModel.pickDate.observe(this, Observer { pick ->
-            if(pick){
+            if (pick) {
                 pickDate()
                 viewModel.onDatePicked()
             }
         })
 
         viewModel.navToTransactionsFragment.observe(this, Observer { navigate ->
-            if(navigate){
+            if (navigate) {
                 createTransaction()
                 findNavController().navigate(AddTransactionFragmentDirections.actionAddTransactionFragmentToTransactionsFragment())
                 viewModel.onReturnedToTransactionsFragment()
@@ -64,21 +73,22 @@ class AddTransactionFragment : DaggerFragment(){
         })
     }
 
-    private fun pickDate(){
+    private fun pickDate() {
         val c = getCurrentDate()
 
-        val datePicker = DatePickerDialog(context!!, DatePickerDialog.OnDateSetListener{ _, chosenYear, chosenMonth, chosenDay ->
+        val datePicker = DatePickerDialog(context!!, DatePickerDialog.OnDateSetListener { _, chosenYear, chosenMonth, chosenDay ->
             binding.btnDate.text = formatBtnDate(chosenDay, chosenMonth, chosenYear)
         }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH))
 
         datePicker.show()
     }
 
-    private fun createTransaction(){
+    private fun createTransaction() {
         val date = binding.btnDate.text.toString()
         val comment = binding.comment.text.toString()
         val amount = binding.amount.text.toString().toDouble()
+        val category = binding.spinnerAddCategories.selectedItem.toString()
 
-        viewModel.insertTransaction(date, comment, amount)
+        viewModel.insertTransaction(date, category, comment, amount)
     }
 }

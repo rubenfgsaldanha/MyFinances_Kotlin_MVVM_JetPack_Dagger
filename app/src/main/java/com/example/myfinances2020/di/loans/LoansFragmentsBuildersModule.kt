@@ -9,8 +9,8 @@ import dagger.android.ContributesAndroidInjector
 abstract class LoansFragmentsBuildersModule {
 
     @ContributesAndroidInjector
-    abstract fun contributeListLoansFragment() : ListLoansFragment
+    abstract fun contributeListLoansFragment(): ListLoansFragment
 
     @ContributesAndroidInjector
-    abstract fun contributeAddLoanFragment() : AddLoanFragment
+    abstract fun contributeAddLoanFragment(): AddLoanFragment
 }

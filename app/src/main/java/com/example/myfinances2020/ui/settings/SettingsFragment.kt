@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.myfinances2020.R
@@ -14,7 +14,7 @@ import com.example.myfinances2020.utils.ViewModelProviderFactory
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
-class SettingsFragment : DaggerFragment(){
+class SettingsFragment : DaggerFragment() {
 
     private lateinit var viewModel: SettingsViewModel
     private lateinit var binding: FragmentSettingsBinding
@@ -34,10 +34,12 @@ class SettingsFragment : DaggerFragment(){
         viewModel = ViewModelProviders.of(this, providerFactory).get(SettingsViewModel::class.java)
         binding.viewModel = viewModel
 
+        populateCurrencies()
+
         setupObservers()
     }
 
-    private fun setupObservers(){
+    private fun setupObservers() {
         viewModel.showPercentage.observe(this, Observer { showPercentage ->
             binding.showPercentages.isChecked = showPercentage
             viewModel.onShowPercentagesClickFinished()
@@ -47,5 +49,11 @@ class SettingsFragment : DaggerFragment(){
             binding.showSubtitles.isChecked = showSubtitles
             viewModel.onShowSubtitlesClickFinished()
         })
+    }
+
+    private fun populateCurrencies() {
+        val currencyAdapter = ArrayAdapter.createFromResource(activity!!.applicationContext, R.array.currency, android.R.layout.simple_spinner_item)
+        currencyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinnerCurrency.adapter = currencyAdapter
     }
 }

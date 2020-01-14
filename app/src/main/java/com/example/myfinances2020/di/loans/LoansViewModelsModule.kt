@@ -14,10 +14,10 @@ abstract class LoansViewModelsModule {
     @Binds
     @IntoMap
     @ViewModelKey(ListLoansViewModel::class)
-    abstract fun bindListLoansViewModule(viewModel: ListLoansViewModel) : ViewModel
+    abstract fun bindListLoansViewModule(viewModel: ListLoansViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(AddLoanViewModel::class)
-    abstract fun bindAddLoanViewModule(viewModel: AddLoanViewModel) : ViewModel
+    abstract fun bindAddLoanViewModule(viewModel: AddLoanViewModel): ViewModel
 }

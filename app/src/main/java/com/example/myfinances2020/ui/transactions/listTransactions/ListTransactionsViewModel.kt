@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.myfinances2020.repository.TransactionsRepository
+import com.example.myfinances2020.repository.network.categories.CategoryRepository
 import com.example.myfinances2020.utils.formatDateWithoutDay
 import com.example.myfinances2020.utils.getCurrentDate
 import kotlinx.coroutines.CoroutineScope
@@ -13,7 +14,10 @@ import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
-class ListTransactionsViewModel @Inject constructor(private val transactionsRepository: TransactionsRepository) : ViewModel(){
+class ListTransactionsViewModel @Inject constructor(
+    private val transactionsRepository: TransactionsRepository,
+    private val categoryRepository: CategoryRepository
+) : ViewModel() {
 
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
@@ -35,12 +39,12 @@ class ListTransactionsViewModel @Inject constructor(private val transactionsRepo
     private val _navToEditTransaction = MutableLiveData<Long>()
     val navToEditTransaction: LiveData<Long> get() = _navToEditTransaction
 
-
     init {
         val c = getCurrentDate()
         currentMonth = c.get(Calendar.MONTH)
         currentYear = c.get(Calendar.YEAR)
 
+        refreshCategories()
         refreshTransactions()
     }
 
@@ -48,12 +52,14 @@ class ListTransactionsViewModel @Inject constructor(private val transactionsRepo
         uiScope.launch { transactionsRepository.refreshTransactions() }
     }
 
+    private fun refreshCategories() {
+        uiScope.launch { categoryRepository.refreshCategories() }
+    }
 
-    fun updatePreviousMonth(): String{
-        if(currentMonth > 0){
+    fun updatePreviousMonth(): String {
+        if (currentMonth > 0) {
             currentMonth--
-        }
-        else{
+        } else {
             currentMonth = 11
             currentYear--
         }
@@ -63,11 +69,10 @@ class ListTransactionsViewModel @Inject constructor(private val transactionsRepo
         return formatDateWithoutDay(currentMonth, currentYear)
     }
 
-    fun updateNextMonth(): String{
-        if(currentMonth < 11){
+    fun updateNextMonth(): String {
+        if (currentMonth < 11) {
             currentMonth++
-        }
-        else{
+        } else {
             currentMonth = 0
             currentYear++
         }
@@ -77,23 +82,23 @@ class ListTransactionsViewModel @Inject constructor(private val transactionsRepo
         return formatDateWithoutDay(currentMonth, currentYear)
     }
 
-    private fun getCurrentMonthTransactions(){
+    private fun getCurrentMonthTransactions() {
         transactionsRepository.getCurrentMonthTransactions(currentMonth, currentYear)
     }
 
-    fun onNextMonthBtnClicked(){
+    fun onNextMonthBtnClicked() {
         _nextMonthBtnClicked.value = true
     }
 
-    fun onNextMonthBtnClickFinished(){
+    fun onNextMonthBtnClickFinished() {
         _nextMonthBtnClicked.value = false
     }
 
-    fun onPreviousMonthBtnClicked(){
+    fun onPreviousMonthBtnClicked() {
         _previousMonthBtnClicked.value = true
     }
 
-    fun onPreviousMonthBtnClickFinished(){
+    fun onPreviousMonthBtnClickFinished() {
         _previousMonthBtnClicked.value = false
     }
 
@@ -105,11 +110,11 @@ class ListTransactionsViewModel @Inject constructor(private val transactionsRepo
         _navToAddTransaction.value = false
     }
 
-    fun onTransactionClicked(id: Long){
+    fun onTransactionClicked(id: Long) {
         _navToEditTransaction.value = id
     }
 
-    fun onNavigatedToEditTransaction(){
+    fun onNavigatedToEditTransaction() {
         _navToEditTransaction.value = null
     }
 

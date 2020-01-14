@@ -1,6 +1,8 @@
 package com.example.myfinances2020.di
 
 import com.example.myfinances2020.MainActivity
+import com.example.myfinances2020.di.graphs.GraphsFragmentBuilderModule
+import com.example.myfinances2020.di.graphs.GraphsViewModelModule
 import com.example.myfinances2020.di.loans.LoansFragmentsBuildersModule
 import com.example.myfinances2020.di.loans.LoansModule
 import com.example.myfinances2020.di.loans.LoansViewModelsModule
@@ -19,6 +21,7 @@ abstract class ActivityBuildersModule {
     @MainScope
     @ContributesAndroidInjector(modules = [TransactionsFragmentsBuildersModule::class, TransactionsViewModelsModule::class,
         TransactionsModule::class, LoansFragmentsBuildersModule::class, LoansViewModelsModule::class, LoansModule::class,
-        SettingsFragmentBuilderModule::class, SettingsViewModelModule::class])
-    abstract fun contributeMainActivity() : MainActivity
+        SettingsFragmentBuilderModule::class, SettingsViewModelModule::class, GraphsFragmentBuilderModule::class,
+        GraphsViewModelModule::class])
+    abstract fun contributeMainActivity(): MainActivity
 }

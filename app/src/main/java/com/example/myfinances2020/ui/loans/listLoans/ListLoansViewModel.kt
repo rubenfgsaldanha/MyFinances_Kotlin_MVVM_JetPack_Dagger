@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 
-class ListLoansViewModel @Inject constructor(private val loansRepository: LoansRepository) : ViewModel(){
+class ListLoansViewModel @Inject constructor(private val loansRepository: LoansRepository) : ViewModel() {
 
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
@@ -35,7 +35,6 @@ class ListLoansViewModel @Inject constructor(private val loansRepository: LoansR
     private val _navToEditLoan = MutableLiveData<Long>()
     val navToEditLoan: LiveData<Long> get() = _navToEditLoan
 
-
     init {
         val c = getCurrentDate()
         currentMonth = c.get(Calendar.MONTH)
@@ -46,11 +45,10 @@ class ListLoansViewModel @Inject constructor(private val loansRepository: LoansR
 
     private fun refreshLoans() = uiScope.launch { loansRepository.refreshLoans() }
 
-    fun updatePreviousMonth(): String{
-        if(currentMonth > 0){
+    fun updatePreviousMonth(): String {
+        if (currentMonth > 0) {
             currentMonth--
-        }
-        else{
+        } else {
             currentMonth = 11
             currentYear--
         }
@@ -60,11 +58,10 @@ class ListLoansViewModel @Inject constructor(private val loansRepository: LoansR
         return formatDateWithoutDay(currentMonth, currentYear)
     }
 
-    fun updateNextMonth(): String{
-        if(currentMonth < 11){
+    fun updateNextMonth(): String {
+        if (currentMonth < 11) {
             currentMonth++
-        }
-        else{
+        } else {
             currentMonth = 0
             currentYear++
         }
@@ -74,30 +71,31 @@ class ListLoansViewModel @Inject constructor(private val loansRepository: LoansR
         return formatDateWithoutDay(currentMonth, currentYear)
     }
 
-    private fun getCurrentMonthLoans(){
+    private fun getCurrentMonthLoans() {
         loansRepository.getCurrentMonthLoans(currentMonth, currentYear)
     }
 
-    fun onNextMonthBtnClicked(){
-        _nextMonthBtnClicked.value = true }
+    fun onNextMonthBtnClicked() {
+        _nextMonthBtnClicked.value = true
+    }
 
-    fun onNextMonthBtnClickFinished(){
+    fun onNextMonthBtnClickFinished() {
         _nextMonthBtnClicked.value = false
     }
 
-    fun onPreviousMonthBtnClicked(){
+    fun onPreviousMonthBtnClicked() {
         _previousMonthBtnClicked.value = true
     }
 
-    fun onPreviousMonthBtnClickFinished(){
+    fun onPreviousMonthBtnClickFinished() {
         _previousMonthBtnClicked.value = false
     }
 
-    fun onFabClicked(){
+    fun onFabClicked() {
         _navToAddLoan.value = true
     }
 
-    fun onNavigatedToAddLoan(){
+    fun onNavigatedToAddLoan() {
         _navToAddLoan.value = false
     }
 
@@ -105,7 +103,7 @@ class ListLoansViewModel @Inject constructor(private val loansRepository: LoansR
         _navToEditLoan.value = id
     }
 
-    fun onNavigatedToEditLoan(){
+    fun onNavigatedToEditLoan() {
         _navToEditLoan.value = null
     }
 

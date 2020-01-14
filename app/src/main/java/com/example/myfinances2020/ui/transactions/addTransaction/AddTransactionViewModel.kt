@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.myfinances2020.repository.database.entities.Transaction
 import com.example.myfinances2020.repository.TransactionsRepository
+import com.example.myfinances2020.repository.network.categories.CategoryRepository
 import com.example.myfinances2020.utils.splitDate
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -12,10 +13,15 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class AddTransactionViewModel @Inject constructor(private val transactionsRepository: TransactionsRepository) : ViewModel(){
+class AddTransactionViewModel @Inject constructor(
+    private val transactionsRepository: TransactionsRepository,
+    categoryRepository: CategoryRepository
+) : ViewModel() {
 
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+
+    var categoryLabels = categoryRepository.categoryLabels
 
     private val _navToTransactionsFragment = MutableLiveData<Boolean>()
     val navToTransactionsFragment: LiveData<Boolean> get() = _navToTransactionsFragment
@@ -25,12 +31,11 @@ class AddTransactionViewModel @Inject constructor(private val transactionsReposi
 
     private var isExpense = true
 
-
-    fun onPickDate(){
+    fun onPickDate() {
         _pickDate.value = true
     }
 
-    fun onDatePicked(){
+    fun onDatePicked() {
         _pickDate.value = false
     }
 
@@ -42,19 +47,25 @@ class AddTransactionViewModel @Inject constructor(private val transactionsReposi
         _navToTransactionsFragment.value = false
     }
 
-    fun onExpenseClicked(){
+    fun onExpenseClicked() {
         isExpense = true
     }
 
-    fun onIncomeClicked(){
+    fun onIncomeClicked() {
         isExpense = false
     }
 
-    fun insertTransaction(dateString: String, comment: String, amount: Double){
+    fun insertTransaction(dateString: String, category: String, comment: String, amount: Double) {
         val date = splitDate(dateString)
 
+        val newAmount: Double = if (isExpense) {
+            0 - amount
+        } else {
+            amount
+        }
+
         val t = Transaction(0, date[0].toInt(), date[1].toInt(), date[2].toInt(),
-            "other", comment, amount, isExpense)
+            category, comment, newAmount, isExpense)
 
         uiScope.launch {
             transactionsRepository.insertTransaction(t)

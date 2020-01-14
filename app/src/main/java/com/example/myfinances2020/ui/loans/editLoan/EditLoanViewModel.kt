@@ -14,7 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class EditLoanViewModel(private val loanId: Long = 0L, application: Application) : AndroidViewModel(application){
+class EditLoanViewModel(private val loanId: Long = 0L, application: Application) : AndroidViewModel(application) {
 
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
@@ -47,7 +47,7 @@ class EditLoanViewModel(private val loanId: Long = 0L, application: Application)
         _loan.addSource(loanRepository.getLoanById(loanId), _loan::setValue)
     }
 
-    fun updateLoan(dateString: String, amount: Double, thirdParty: String){
+    fun updateLoan(dateString: String, amount: Double, thirdParty: String) {
         val date = splitDate(dateString)
         val l = Loan(_loan.value!!._id, date[0].toInt(), date[1].toInt(), date[2].toInt(), isLoaner, amount, thirdParty, isLoanPaid)
 
@@ -55,40 +55,40 @@ class EditLoanViewModel(private val loanId: Long = 0L, application: Application)
         onReturnToLoansFragment()
     }
 
-    fun deleteLoan(){
+    fun deleteLoan() {
         uiScope.launch { loanRepository.deleteLoanById(_loan.value!!._id) }
         onReturnToLoansFragment()
     }
 
-    fun onPickDate(){
+    fun onPickDate() {
         _pickDate.value = true
     }
 
-    fun onDatePicked(){
+    fun onDatePicked() {
         _pickDate.value = false
     }
 
-    fun onLoanerClicked(){
+    fun onLoanerClicked() {
         isLoaner = true
     }
 
-    fun onLoaneeClicked(){
+    fun onLoaneeClicked() {
         isLoaner = false
     }
 
-    fun onIsPayedClicked(){
+    fun onIsPayedClicked() {
         isLoanPaid = true
     }
 
-    fun onIsNotPayedClicked(){
+    fun onIsNotPayedClicked() {
         isLoanPaid = false
     }
 
-    fun onUpdate(){
+    fun onUpdate() {
         _update.value = true
     }
 
-    fun onUpdated(){
+    fun onUpdated() {
         _update.value = false
     }
 

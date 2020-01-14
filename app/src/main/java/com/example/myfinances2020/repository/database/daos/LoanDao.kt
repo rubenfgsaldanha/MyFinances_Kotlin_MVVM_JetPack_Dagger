@@ -17,13 +17,13 @@ interface LoanDao {
     suspend fun update(loan: Loan)
 
     @Query("select * from loans order by _id desc")
-    fun getAllLoans() : LiveData<List<Loan>>
+    fun getAllLoans(): LiveData<List<Loan>>
 
     @Query("select * from loans where _id = :id")
-    fun getLoanById(id: Long) : LiveData<Loan>
+    fun getLoanById(id: Long): LiveData<Loan>
 
     @Query("select * from loans where loan_month = :month and loan_year = :year")
-    fun getLoansByMonth(month: Int, year: Int) : LiveData<List<Loan>>
+    fun getLoansByMonth(month: Int, year: Int): LiveData<List<Loan>>
 
     @Query("delete from loans where _id = :id")
     suspend fun deleteLoanById(id: Long)

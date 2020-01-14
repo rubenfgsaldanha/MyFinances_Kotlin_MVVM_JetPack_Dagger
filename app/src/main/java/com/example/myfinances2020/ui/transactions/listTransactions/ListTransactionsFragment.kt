@@ -11,20 +11,17 @@ import androidx.navigation.fragment.findNavController
 import com.example.myfinances2020.R
 import com.example.myfinances2020.databinding.FragmentListTransactionsBinding
 import com.example.myfinances2020.utils.ViewModelProviderFactory
-import com.example.myfinances2020.utils.formatDateWithoutDay
-import com.example.myfinances2020.utils.getCurrentDate
+import com.example.myfinances2020.utils.setCurrentDate
 import dagger.android.support.DaggerFragment
-import java.util.*
 import javax.inject.Inject
 
-class ListTransactionsFragment : DaggerFragment(){
+class ListTransactionsFragment : DaggerFragment() {
 
     private lateinit var binding: FragmentListTransactionsBinding
     private lateinit var viewModel: ListTransactionsViewModel
     private lateinit var adapter: TransactionsAdapter
 
     @Inject lateinit var providerFactory: ViewModelProviderFactory
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentListTransactionsBinding.inflate(inflater)
@@ -48,36 +45,35 @@ class ListTransactionsFragment : DaggerFragment(){
     private fun setupObservers() {
         viewModel.transactions.observe(this, Observer { list ->
             list?.let {
-                val c = getCurrentDate()
-                binding.currentMonth.text = formatDateWithoutDay(c.get(Calendar.MONTH), c.get(Calendar.YEAR))
+                binding.currentMonth.text = setCurrentDate()
                 adapter.submitList(list)
             }
         })
 
         viewModel.previousMonthBtnClicked.observe(this, Observer { clicked ->
-            if(clicked){
+            if (clicked) {
                 binding.currentMonth.text = viewModel.updatePreviousMonth()
                 viewModel.onPreviousMonthBtnClickFinished()
             }
         })
 
         viewModel.nextMonthBtnClicked.observe(this, Observer { clicked ->
-            if(clicked){
+            if (clicked) {
                 binding.currentMonth.text = viewModel.updateNextMonth()
                 viewModel.onNextMonthBtnClickFinished()
             }
         })
 
         viewModel.navToAddTransaction.observe(this, Observer { navigate ->
-            if(navigate){
-                this.findNavController().navigate(ListTransactionsFragmentDirections.actionTransactionsFragmentToAddTransactionFragment())
+            if (navigate) {
+                findNavController().navigate(ListTransactionsFragmentDirections.actionTransactionsFragmentToAddTransactionFragment())
                 viewModel.onNavigatedToAddTransaction()
             }
         })
 
         viewModel.navToEditTransaction.observe(this, Observer { navigate ->
             navigate?.let { id ->
-                this.findNavController().navigate(ListTransactionsFragmentDirections.actionTransactionsFragmentToEditTransactionFragment(id))
+                findNavController().navigate(ListTransactionsFragmentDirections.actionTransactionsFragmentToEditTransactionFragment(id))
                 viewModel.onNavigatedToEditTransaction()
             }
         })

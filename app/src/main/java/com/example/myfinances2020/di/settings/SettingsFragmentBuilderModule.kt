@@ -8,5 +8,5 @@ import dagger.android.ContributesAndroidInjector
 abstract class SettingsFragmentBuilderModule {
 
     @ContributesAndroidInjector
-    abstract fun contributeSettingsFragment() : SettingsFragment
+    abstract fun contributeSettingsFragment(): SettingsFragment
 }

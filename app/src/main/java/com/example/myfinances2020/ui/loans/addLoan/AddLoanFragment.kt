@@ -18,7 +18,7 @@ import dagger.android.support.DaggerFragment
 import java.util.*
 import javax.inject.Inject
 
-class AddLoanFragment : DaggerFragment(){
+class AddLoanFragment : DaggerFragment() {
 
     private lateinit var viewModel: AddLoanViewModel
     private lateinit var binding: FragmentAddLoanBinding
@@ -49,14 +49,14 @@ class AddLoanFragment : DaggerFragment(){
 
     private fun setupObservers() {
         viewModel.pickDate.observe(this, Observer { pick ->
-            if(pick){
+            if (pick) {
                 pickDate()
                 viewModel.onDatePicked()
             }
         })
 
         viewModel.navToLoansFragment.observe(this, Observer { navigate ->
-            if(navigate){
+            if (navigate) {
                 createLoan()
                 findNavController().navigate(AddLoanFragmentDirections.actionAddLoanFragmentToLoansFragment())
                 viewModel.onReturnedToLoansFragment()
@@ -64,7 +64,7 @@ class AddLoanFragment : DaggerFragment(){
         })
     }
 
-    private fun pickDate(){
+    private fun pickDate() {
         val c = getCurrentDate()
 
         val datePicker = DatePickerDialog(context!!, DatePickerDialog.OnDateSetListener { _, chosenYear, chosenMonth, chosenDay ->
@@ -74,7 +74,7 @@ class AddLoanFragment : DaggerFragment(){
         datePicker.show()
     }
 
-    private fun createLoan(){
+    private fun createLoan() {
         val date = binding.btnLoanDate.text.toString()
         val amount = binding.addLoanAmount.text.toString().toDouble()
         val thirdParty = binding.thirdP.text.toString()
