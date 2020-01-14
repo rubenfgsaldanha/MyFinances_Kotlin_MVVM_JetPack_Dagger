@@ -1,31 +1,22 @@
-package com.example.myfinances2020.di
+package com.example.myfinances2020.diKoin
 
 import android.app.Application
-import android.content.Context.MODE_PRIVATE
+import android.content.Context
 import android.content.SharedPreferences
 import com.example.myfinances2020.repository.database.getDatabase
 import com.example.myfinances2020.utils.ENDPOINT
 import com.example.myfinances2020.utils.SHARED_PREFS
 import com.google.gson.Gson
-import dagger.Module
-import dagger.Provides
+import org.koin.android.ext.koin.androidApplication
+import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Singleton
 
-@Module
-class AppModule {
-
-    @Singleton
-    @Provides
+val retrofitModule = module {
     fun provideGson(): Gson = Gson()
 
-    @Singleton
-    @Provides
     fun provideGsonConverterFactory(gson: Gson): GsonConverterFactory = GsonConverterFactory.create(gson)
 
-    @Singleton
-    @Provides
     fun provideRetrofitInstance(converterFactory: GsonConverterFactory): Retrofit {
         return Retrofit.Builder()
             .baseUrl(ENDPOINT)
@@ -33,11 +24,19 @@ class AppModule {
             .build()
     }
 
-    @Singleton
-    @Provides
+    single { provideGson() }
+    single { provideGsonConverterFactory(get()) }
+    single { provideRetrofitInstance(get()) }
+}
+
+val databaseModule = module {
     fun provideDatabaseInstance(application: Application) = getDatabase(application)
 
-    @Singleton
-    @Provides
-    fun provideSharedPreferences(application: Application): SharedPreferences = application.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE)
+    single { provideDatabaseInstance(androidApplication()) }
+}
+
+val sharedPreferencesModule = module {
+    fun provideSharedPreferences(application: Application): SharedPreferences = application.getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)
+
+    single { provideSharedPreferences(androidApplication()) }
 }

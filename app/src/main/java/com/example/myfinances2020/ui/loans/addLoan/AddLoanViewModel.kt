@@ -10,9 +10,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-class AddLoanViewModel @Inject constructor(private val loansRepository: LoansRepository) : ViewModel() {
+class AddLoanViewModel(private val loansRepository: LoansRepository) : ViewModel() {
 
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)

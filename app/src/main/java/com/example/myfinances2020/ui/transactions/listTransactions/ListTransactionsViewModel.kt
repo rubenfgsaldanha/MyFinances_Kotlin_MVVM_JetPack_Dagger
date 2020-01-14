@@ -3,8 +3,8 @@ package com.example.myfinances2020.ui.transactions.listTransactions
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.myfinances2020.repository.CategoryRepository
 import com.example.myfinances2020.repository.TransactionsRepository
-import com.example.myfinances2020.repository.network.categories.CategoryRepository
 import com.example.myfinances2020.utils.formatDateWithoutDay
 import com.example.myfinances2020.utils.getCurrentDate
 import kotlinx.coroutines.CoroutineScope
@@ -12,9 +12,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.util.*
-import javax.inject.Inject
 
-class ListTransactionsViewModel @Inject constructor(
+class ListTransactionsViewModel(
     private val transactionsRepository: TransactionsRepository,
     private val categoryRepository: CategoryRepository
 ) : ViewModel() {

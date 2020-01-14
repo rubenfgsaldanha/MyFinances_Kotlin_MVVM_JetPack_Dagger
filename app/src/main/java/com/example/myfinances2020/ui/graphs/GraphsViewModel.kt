@@ -4,8 +4,8 @@ import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.myfinances2020.repository.CategoryRepository
 import com.example.myfinances2020.repository.TransactionsRepository
-import com.example.myfinances2020.repository.network.categories.CategoryRepository
 import com.example.myfinances2020.utils.SHOW_PERCENTAGES
 import com.example.myfinances2020.utils.formatDateWithoutDay
 import com.example.myfinances2020.utils.getCurrentDate
@@ -16,12 +16,11 @@ import kotlinx.coroutines.launch
 import lecho.lib.hellocharts.model.SliceValue
 import java.text.DecimalFormat
 import java.util.*
-import javax.inject.Inject
 import kotlin.collections.HashMap
 import kotlin.math.abs
 import kotlin.math.roundToInt
 
-class GraphsViewModel @Inject constructor(
+class GraphsViewModel(
     private val sharedPreferences: SharedPreferences,
     private val transactionsRepository: TransactionsRepository,
     private val categoryRepository: CategoryRepository

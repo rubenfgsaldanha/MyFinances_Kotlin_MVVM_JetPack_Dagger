@@ -5,10 +5,10 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.myfinances2020.repository.CategoryRepository
 import com.example.myfinances2020.repository.TransactionsRepository
 import com.example.myfinances2020.repository.database.entities.Transaction
 import com.example.myfinances2020.repository.database.getDatabase
-import com.example.myfinances2020.repository.network.categories.CategoryRepository
 import com.example.myfinances2020.utils.splitDate
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -22,7 +22,11 @@ class EditTransactionViewModel(private val transactionId: Long = 0L, application
 
     private val database = getDatabase(application)
     private val transactionsRepository = TransactionsRepository(database.transactionDao, null)
-    private val categoryRepository = CategoryRepository(database.categoryDao, null)
+    private val categoryRepository =
+        CategoryRepository(
+            database.categoryDao,
+            null
+        )
 
     var categoryLabels = categoryRepository.categoryLabels
 

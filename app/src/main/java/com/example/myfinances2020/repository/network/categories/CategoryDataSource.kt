@@ -3,9 +3,9 @@ package com.example.myfinances2020.repository.network.categories
 import com.example.myfinances2020.repository.network.Result
 import com.example.myfinances2020.utils.safeNetworkCall
 import java.io.IOException
-import javax.inject.Inject
 
-class CategoryDataSource @Inject constructor(private val categoryService: CategoryService) {
+
+class CategoryDataSource(private val categoryService: CategoryService) {
 
     suspend fun getCategories() = safeNetworkCall(networkCall = { requestGetCategories() }, errorMessage = "Error getting categories")
 

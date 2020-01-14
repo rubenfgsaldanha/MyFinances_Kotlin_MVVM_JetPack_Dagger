@@ -5,23 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.myfinances2020.R
 import com.example.myfinances2020.databinding.FragmentListTransactionsBinding
-import com.example.myfinances2020.utils.ViewModelProviderFactory
 import com.example.myfinances2020.utils.setCurrentDate
-import dagger.android.support.DaggerFragment
-import javax.inject.Inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ListTransactionsFragment : DaggerFragment() {
+
+class ListTransactionsFragment : Fragment() {
+
+    private val viewModel by viewModel<ListTransactionsViewModel>()
 
     private lateinit var binding: FragmentListTransactionsBinding
-    private lateinit var viewModel: ListTransactionsViewModel
     private lateinit var adapter: TransactionsAdapter
 
-    @Inject lateinit var providerFactory: ViewModelProviderFactory
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentListTransactionsBinding.inflate(inflater)
@@ -33,7 +32,6 @@ class ListTransactionsFragment : DaggerFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel = ViewModelProviders.of(this, providerFactory).get(ListTransactionsViewModel::class.java)
         binding.viewModel = viewModel
 
         adapter = TransactionsAdapter(TransactionListener { id -> viewModel.onTransactionClicked(id) })

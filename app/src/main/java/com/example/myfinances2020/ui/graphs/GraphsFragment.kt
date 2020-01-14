@@ -5,23 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.example.myfinances2020.R
 import com.example.myfinances2020.databinding.FragmentGraphsBinding
-import com.example.myfinances2020.utils.ViewModelProviderFactory
 import com.example.myfinances2020.utils.setCurrentDate
-import dagger.android.support.DaggerFragment
 import lecho.lib.hellocharts.model.PieChartData
 import lecho.lib.hellocharts.model.SliceValue
-import javax.inject.Inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class GraphsFragment : DaggerFragment() {
 
-    private lateinit var viewModel: GraphsViewModel
+class GraphsFragment : Fragment() {
+
+    private val viewModel by viewModel<GraphsViewModel>()
     private lateinit var binding: FragmentGraphsBinding
-
-    @Inject lateinit var providerFactory: ViewModelProviderFactory
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentGraphsBinding.inflate(inflater)
@@ -33,7 +30,6 @@ class GraphsFragment : DaggerFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel = ViewModelProviders.of(this, providerFactory).get(GraphsViewModel::class.java)
         binding.viewModel = viewModel
 
         binding.currentMonthGraphs.text = setCurrentDate()

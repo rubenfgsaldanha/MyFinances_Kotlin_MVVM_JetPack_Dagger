@@ -11,9 +11,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.util.*
-import javax.inject.Inject
 
-class ListLoansViewModel @Inject constructor(private val loansRepository: LoansRepository) : ViewModel() {
+
+class ListLoansViewModel(private val loansRepository: LoansRepository) : ViewModel() {
 
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)

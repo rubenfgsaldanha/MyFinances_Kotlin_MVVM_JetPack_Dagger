@@ -7,9 +7,9 @@ import com.example.myfinances2020.repository.network.loans.LoanDataSource
 import com.example.myfinances2020.repository.network.loans.asDatabaseModel
 import com.example.myfinances2020.utils.getCurrentDate
 import java.util.*
-import javax.inject.Inject
 
-class LoansRepository @Inject constructor(private val loanDao: LoanDao, private val loanDataSource: LoanDataSource?) {
+
+class LoansRepository(private val loanDao: LoanDao, private val loanDataSource: LoanDataSource?) {
 
     private val date = getCurrentDate()
     var loans = loanDao.getLoansByMonth(date.get(Calendar.MONTH) + 1, date.get(Calendar.YEAR))

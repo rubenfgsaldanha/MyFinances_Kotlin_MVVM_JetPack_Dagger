@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myfinances2020.repository.database.entities.Transaction
 import com.example.myfinances2020.databinding.ListItemTransactionBinding
+import com.example.myfinances2020.repository.database.entities.Transaction
 
 class TransactionsAdapter(private val clickListener: TransactionListener) : ListAdapter<Transaction,
         TransactionsAdapter.ViewHolder>(TransactionDiffCallback()) {

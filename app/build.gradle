@@ -78,12 +78,17 @@ dependencies {
     implementation 'com.github.lecho:hellocharts-library:1.5.8@aar'
 
     //dagger
-    implementation "com.google.dagger:dagger:$version_dagger"
-    kapt "com.google.dagger:dagger-compiler:$version_dagger"
+    //implementation "com.google.dagger:dagger:$version_dagger"
+    //kapt "com.google.dagger:dagger-compiler:$version_dagger"
 
     // Dagger Android
-    implementation "com.google.dagger:dagger-android-support:$version_dagger"
-    kapt "com.google.dagger:dagger-android-processor:$version_dagger"
+    //implementation "com.google.dagger:dagger-android-support:$version_dagger"
+    //kapt "com.google.dagger:dagger-android-processor:$version_dagger"
+
+    //koin
+    implementation "org.koin:koin-android:$version_koin"
+    implementation "org.koin:koin-androidx-viewmodel:$version_koin"
+    implementation "org.koin:koin-androidx-scope:$version_koin"
 
     //testing
     testImplementation 'junit:junit:4.12'

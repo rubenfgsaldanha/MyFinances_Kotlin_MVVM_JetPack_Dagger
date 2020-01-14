@@ -1,10 +1,11 @@
-package com.example.myfinances2020.repository.network.categories
+package com.example.myfinances2020.repository
 
 import com.example.myfinances2020.repository.database.daos.CategoryDao
 import com.example.myfinances2020.repository.network.Result
-import javax.inject.Inject
+import com.example.myfinances2020.repository.network.categories.CategoryDataSource
+import com.example.myfinances2020.repository.network.categories.asDatabaseModel
 
-class CategoryRepository @Inject constructor(
+class CategoryRepository(
     private val categoryDao: CategoryDao,
     private val categoryDataSource: CategoryDataSource?
 ) {

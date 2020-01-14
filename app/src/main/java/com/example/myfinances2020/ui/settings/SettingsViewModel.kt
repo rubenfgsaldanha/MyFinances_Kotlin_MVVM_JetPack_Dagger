@@ -6,9 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.myfinances2020.utils.SHOW_PERCENTAGES
 import com.example.myfinances2020.utils.SHOW_SUBTITLES
-import javax.inject.Inject
 
-class SettingsViewModel @Inject constructor(private val sharedPreferences: SharedPreferences) : ViewModel() {
+class SettingsViewModel(private val sharedPreferences: SharedPreferences) : ViewModel() {
 
     private val _showPercentage = MutableLiveData<Boolean>()
     val showPercentage: LiveData<Boolean> get() = _showPercentage

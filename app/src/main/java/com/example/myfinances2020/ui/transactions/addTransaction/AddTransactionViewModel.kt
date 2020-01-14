@@ -3,17 +3,16 @@ package com.example.myfinances2020.ui.transactions.addTransaction
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.myfinances2020.repository.database.entities.Transaction
+import com.example.myfinances2020.repository.CategoryRepository
 import com.example.myfinances2020.repository.TransactionsRepository
-import com.example.myfinances2020.repository.network.categories.CategoryRepository
+import com.example.myfinances2020.repository.database.entities.Transaction
 import com.example.myfinances2020.utils.splitDate
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-class AddTransactionViewModel @Inject constructor(
+class AddTransactionViewModel(
     private val transactionsRepository: TransactionsRepository,
     categoryRepository: CategoryRepository
 ) : ViewModel() {

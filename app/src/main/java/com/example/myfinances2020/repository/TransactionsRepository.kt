@@ -7,9 +7,9 @@ import com.example.myfinances2020.repository.network.transactions.TransactionDat
 import com.example.myfinances2020.repository.network.transactions.asDatabaseModel
 import com.example.myfinances2020.utils.getCurrentDate
 import java.util.*
-import javax.inject.Inject
 
-class TransactionsRepository @Inject constructor(
+
+class TransactionsRepository(
     private val transactionDao: TransactionDao,
     private val transactionDataSource: TransactionDataSource?
 ) {

@@ -7,24 +7,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.myfinances2020.R
 import com.example.myfinances2020.databinding.FragmentAddTransactionBinding
-import com.example.myfinances2020.utils.ViewModelProviderFactory
 import com.example.myfinances2020.utils.formatBtnDate
 import com.example.myfinances2020.utils.getCurrentDate
-import dagger.android.support.DaggerFragment
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
-import javax.inject.Inject
 
-class AddTransactionFragment : DaggerFragment() {
 
-    private lateinit var viewModel: AddTransactionViewModel
+class AddTransactionFragment : Fragment() {
+
+    private val viewModel by viewModel<AddTransactionViewModel>()
     private lateinit var binding: FragmentAddTransactionBinding
 
-    @Inject lateinit var providerFactory: ViewModelProviderFactory
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentAddTransactionBinding.inflate(inflater)
@@ -36,7 +34,6 @@ class AddTransactionFragment : DaggerFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel = ViewModelProviders.of(this, providerFactory).get(AddTransactionViewModel::class.java)
         binding.viewModel = viewModel
 
         setDate()
