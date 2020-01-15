@@ -19,9 +19,11 @@ import com.example.myfinances2020.repository.network.transactions.TransactionDat
 import com.example.myfinances2020.repository.network.transactions.TransactionService
 import com.example.myfinances2020.ui.graphs.GraphsViewModel
 import com.example.myfinances2020.ui.loans.addLoan.AddLoanViewModel
+import com.example.myfinances2020.ui.loans.editLoan.EditLoanViewModel
 import com.example.myfinances2020.ui.loans.listLoans.ListLoansViewModel
 import com.example.myfinances2020.ui.settings.SettingsViewModel
 import com.example.myfinances2020.ui.transactions.addTransaction.AddTransactionViewModel
+import com.example.myfinances2020.ui.transactions.editTransaction.EditTransactionViewModel
 import com.example.myfinances2020.ui.transactions.listTransactions.ListTransactionsViewModel
 import com.example.myfinances2020.utils.ENDPOINT
 import com.example.myfinances2020.utils.SHARED_PREFS
@@ -38,8 +40,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 val viewModelsModule = module {
     viewModel { ListLoansViewModel(get()) }
     viewModel { AddLoanViewModel(get()) }
+    viewModel { (loanId: Long) -> EditLoanViewModel(loanId, get()) }
     viewModel { ListTransactionsViewModel(get(), get()) }
     viewModel { AddTransactionViewModel(get(), get()) }
+    viewModel { (transactionId: Long) -> EditTransactionViewModel(transactionId, get()) }
     viewModel { GraphsViewModel(get(), get(), get()) }
     viewModel { SettingsViewModel(get()) }
 }

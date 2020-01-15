@@ -9,12 +9,13 @@ import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.myfinances2020.R
 import com.example.myfinances2020.databinding.FragmentEditTransactionBinding
 import com.example.myfinances2020.utils.formatBtnDate
 import com.example.myfinances2020.utils.getCurrentDate
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 import java.util.*
 
 class EditTransactionFragment : Fragment() {
@@ -26,11 +27,10 @@ class EditTransactionFragment : Fragment() {
         binding = FragmentEditTransactionBinding.inflate(inflater)
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.edit_transaction)
 
-        val application = requireNotNull(this.activity).application
         val arguments = EditTransactionFragmentArgs.fromBundle(arguments!!)
-        val viewModelFactory = EditTransactionViewModelFactory(arguments.transactionId, application)
 
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(EditTransactionViewModel::class.java)
+        val auxViewModel by viewModel<EditTransactionViewModel> { parametersOf(arguments.transactionId) }
+        viewModel = auxViewModel
         binding.viewModel = viewModel
 
         binding.lifecycleOwner = this

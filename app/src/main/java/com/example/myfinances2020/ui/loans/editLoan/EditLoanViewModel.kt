@@ -1,10 +1,10 @@
 package com.example.myfinances2020.ui.loans.editLoan
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.example.myfinances2020.repository.LoansRepository
 import com.example.myfinances2020.repository.database.entities.Loan
 import com.example.myfinances2020.repository.database.getDatabase
@@ -14,7 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class EditLoanViewModel(private val loanId: Long = 0L, application: Application) : AndroidViewModel(application) {
+class EditLoanViewModel(private val loanId: Long = 0L, application: Application) : ViewModel() {
 
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
